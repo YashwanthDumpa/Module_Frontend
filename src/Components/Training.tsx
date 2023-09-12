@@ -20,6 +20,9 @@ const Training: React.FC = () => {
         async function getTraining() {
             const trainingData = await axios.get("http://localhost:8080/get-training-data", { headers: { Authorization: token } })
             console.log(trainingData.data.trainingData);
+            if(trainingData.data.message === "TokenExpiredError"){
+                Navigate("/")
+            }
             setTrainingData(trainingData.data.trainingData)
         }
 

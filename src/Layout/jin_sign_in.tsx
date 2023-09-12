@@ -62,42 +62,6 @@ const JinSignIn = () => {
 
       try {
         // Send a POST request to your login endpoint
-        if (data.email === "admin@jmangroup.com" && data.password === "Password@1234") {
-          console.log("Line 56 admin");
-          const response = await axios.post("http://localhost:8080/login", data)
-          console.log(response.data.message);
-          //   console.log(response.data.data);
-
-          if (response.data.message === "Login") {
-            sessionStorage.setItem('authToken', response.data.token)
-            toast.success('Login Successfully', {
-              position: toast.POSITION.TOP_RIGHT
-            });
-
-            setTimeout(() => {
-              Navigate('/home')
-            }, 3000)
-
-          }
-          if (response.data.message === "password not matching") {
-            toast.error('Invalid User', {
-              position: toast.POSITION.TOP_RIGHT
-            });
-
-          }
-          if (response.data.message === "User Not Found") {
-            toast.error('User Not Found', {
-              position: toast.POSITION.TOP_RIGHT
-            });
-
-          }
-          if (response.data.message === "empty datad") {
-            toast.error('All Fields are mandatory', {
-              position: toast.POSITION.TOP_RIGHT
-            });
-          }
-
-        } else {
           const response = await axios.post("http://localhost:8080/login", data)
           console.log(response.data.message);
           //   console.log(response.data.data);
@@ -110,7 +74,17 @@ const JinSignIn = () => {
 
             setTimeout(() => {
               Navigate('/userhome')
-            }, 3000)
+            }, 1000)
+          }
+          if (response.data.message === "Login-admin") {
+            sessionStorage.setItem('authToken', response.data.token)
+            toast.success('Login Successfully', {
+              position: toast.POSITION.TOP_RIGHT
+            });
+
+            setTimeout(() => {
+              Navigate('/home')
+            }, 1000)
           }
 
           if (response.data.message === "password not matching") {
@@ -129,7 +103,7 @@ const JinSignIn = () => {
               position: toast.POSITION.TOP_RIGHT
             });
           }
-        }
+        
       } catch (error) {
         console.error("Login error:", error);
         toast.error('Login failed. Please check your credentials', {

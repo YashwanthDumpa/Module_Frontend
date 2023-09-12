@@ -124,6 +124,41 @@ function Row(props: { data: any }) {
     }
   }, []);
 
+
+  
+  async function handleDelete(trainingTitle:any){
+
+    try {
+
+
+        const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`,{headers:{Authorization:tokendata}})
+
+        console.log(send.data.message);
+
+        if(send.data.message === "Deleted Successfully"){
+
+            toast.success("Deleted Successfully", {
+
+                position: toast.POSITION.TOP_RIGHT,
+
+              });
+
+             
+
+              window.location.reload()
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+       
+
+    }
+
+}
+
   async function handleTraining(trainingTitled: any) {
 
 
@@ -180,9 +215,11 @@ function Row(props: { data: any }) {
         <TableCell align="center">{data.skillCategory}</TableCell>
         <TableCell align="center">{data.startDateTime}</TableCell>
         <TableCell align="center">{data.endDateTime}</TableCell>
-        <TableCell><button className="btn btn-sm see-more" onClick={() => handleTraining(data.trainingTitle)}>
+        <TableCell>
+          {window.location.pathname === '/home'?<button className="btn btn-sm see-more" onClick={() => handleDelete(data.trainingTitle)}>Delete</button>:<button className="btn btn-sm see-more" onClick={() => handleTraining(data.trainingTitle)}>
           Register
-        </button></TableCell>
+        </button>}
+          </TableCell>
 
         <TableCell>
           <IconButton

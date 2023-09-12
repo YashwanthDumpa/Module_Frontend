@@ -70,11 +70,21 @@ const TrainingForm = () => {
       axios
         .post(url, data)
         .then((response) => {
-          setPost(response.data);
-          toast.success("Training Created Successfully", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          close("");
+          if(response.data.message === "Training Already Exists"){
+            toast.warning("Training Already Exists", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+          }
+          if(response.data.message === "Training Created Successfully"){
+            setPost(response.data);
+            toast.success("Training Created Successfully", {
+              position: toast.POSITION.TOP_RIGHT,
+            });
+            setTimeout(()=>{
+              window.location.reload()
+            },1000)
+          }
+       
         })
         .catch((error) => {
           toast.error("Network Error", {
@@ -238,7 +248,6 @@ const TrainingForm = () => {
             </div>
           </div>
         ) 
-        
         : (
           ""
         )}

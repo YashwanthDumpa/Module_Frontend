@@ -12,6 +12,41 @@ export default function Card(props: any) {
     }
   }, []);
 
+
+  async function handleDelete(){
+
+    try {
+
+        const trainingTitle =await props.tdata.trainingTitle
+
+        const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`,{headers:{Authorization:tokendata}})
+
+        console.log(send.data.message);
+
+        if(send.data.message === "Deleted Successfully"){
+
+            toast.success("Deleted Successfully", {
+
+                position: toast.POSITION.TOP_RIGHT,
+
+              });
+
+             
+
+              window.location.reload()
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+       
+
+    }
+
+}
+
   async function handleTraining() {
     try {
       const trainingTitle = await props.tdata.trainingTitle;
@@ -83,8 +118,8 @@ export default function Card(props: any) {
             Register
           </button>
         ) : (
-          <button className="btn btn-sm see-more" onClick={handleTraining}>
-            Register
+          <button className="btn btn-sm see-more" onClick={handleDelete}>
+            Delete
           </button>
         )}
       </div>
