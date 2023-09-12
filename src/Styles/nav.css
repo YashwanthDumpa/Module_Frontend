@@ -15,23 +15,6 @@
   overflow: hidden;
 }
 
-.logo{
-  margin-top: 10px;
-}
-
-.logo-space{
-  height: 2.5em;
-}
-
-.menu li a {
-  line-height: 3em;
-  text-align: center;
-  color: white;
-  /* position: relative; */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: background 0.1s ease-in-out;
-}
-
 .menu-bar {
   overflow: hidden;
   text-align: left;
@@ -42,23 +25,47 @@
   transition: all 0.1s ease-in-out;
 }
 
+.logo{
+  margin-top: 10px;
+  height: 25px;
+  margin-bottom: 10px;
+}
+
+.username {
+  color: white;
+  font-size: 15px;
+  font-family: "Arial" !important;
+  position: relative;
+  top: 2.4%;
+  left: 5%;
+  margin-bottom: 1.7em;
+}
+
 .close-btn{
   color: white;
   width:fit-content;
-  position: relative;
-  left: 80%;
-  bottom: 3px;
+  font-size:xx-small !important;
+  margin-bottom: 6px;
+  left: 85%;
+}
+
+.menu li a {
+  line-height: 2.5em;
+  text-align: center;
+  color: white;
+  /* position: relative; */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.1s ease-in-out;
 }
 
 .menu-bar li a {
   display: block;
-  height: 3em;
-  line-height: 3em;
+  height: 2.5em;
+  line-height: 2.5em;
   text-align: left;
   color: white;
   text-decoration: none;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: background 0.1s ease-in-out;
 }
 
@@ -67,65 +74,19 @@
   height: 100%;
 }
 
-@media screen and (max-width: 34em) {
-  .menu li,
-  .menu-bar {
-    font-size: 70%;
-    left: 5.7em;
-  }
-}
-
-@media screen and (max-height: 34em) {
-  .menu li,
-  .menu-bar {
-    font-size: 70%;
-    left: 5.7em;
-  }
-}
-
-/* @media screen and (max-height: 34em) and (max-width: 500px){
-  .mengu{
-        height:3.5em;
-    }
-} */
-
-.bottom {
-  width: 100%;
-  margin-top: 20vh;
-  margin-left: 3.5vh;
-  margin-right: auto;
-}
-
-.line{
-  background-color: white;
-  height: 0.5px;
-  box-shadow: 0 0 0 0.7px white;
-  width: 7em;
-  overflow: hidden;
-  opacity: 0.8;
-  border-radius: 100%;
-  top:92%;
-  position: fixed;
-}
-
-.username {
+.signout{
   color: white;
-  font-size: 11px;
-  font-family: "Arial" !important;
-  position: fixed !important;
-  bottom: 5px;
-  left: 5%;
-  top:93%;
-  width: auto;
+  position: fixed;
+  top:93.2%;
 }
 
-.signout {
+.signout-logo {
   margin-left: 40%;
   color: white;
   text-align: center;
 }
 
-.butn{
+.signout-btn{
   border:none;
   max-width: max-content;
   background-color: transparent;
@@ -135,3 +96,54 @@
   top:93%;
   left: 0.8%;
 }
+
+
+@media screen and (max-width: 34em) {
+  .menu {
+    width: 4em;
+  }
+
+  .logo{
+    height: 17px;
+  }
+
+  .menu li{
+    width: 2px !important;
+    height: 20px;
+  }
+
+  .menu li a{
+    line-height: 1em;
+  }
+
+  
+}
+
+@media screen and (max-height: 34em) {
+  .menu li,
+  .menu-bar {
+    font-size: 100%;
+    left: 3.9em;
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .menu li,
+  .menu-bar {
+    font-size: 100%;
+    left: 3.87em;
+  }
+}
+
+@media screen and (max-height: 60em) {
+  .menu li,
+  .menu-bar {
+    font-size: 100%;
+    left: 3.87em;
+  }
+}
+/* @media screen and (max-height: 34em) and (max-width: 500px){
+  .mengu{
+        height:3.5em;
+    }
+} */

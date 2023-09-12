@@ -16,11 +16,8 @@ export default function Card(props: any) {
   async function handleDelete(){
 
     try {
-
         const trainingTitle =await props.tdata.trainingTitle
-
         const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`,{headers:{Authorization:tokendata}})
-
         console.log(send.data.message);
 
         if(send.data.message === "Deleted Successfully"){
