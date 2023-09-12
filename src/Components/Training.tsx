@@ -7,6 +7,8 @@ import Card from './card';
 import TrainingForm from './Form';
 import CustomizedTables from './test';
 
+import '../Styles/training.css';
+
 
 const Training: React.FC = () => {
     const Navigate = useNavigate()
@@ -38,12 +40,14 @@ const Training: React.FC = () => {
     return (
         <>
             <TrainingForm />
+            <div className='show-mobile'>
             {trainingData.map(data =>
                 <div className="p-3">
                     < Card tdata={data} />
                 </div>
             )}
-            <div>
+            </div>
+            <div className='show-monitor'>
                 <CustomizedTables trainingData={trainingData} />
             </div>
         </>
