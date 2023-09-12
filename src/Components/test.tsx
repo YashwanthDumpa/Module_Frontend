@@ -28,6 +28,8 @@ import SwapVertIcon from '@mui/icons-material/SwapVert';
 import { ToastContainer, toast } from "react-toastify";
 
 
+import Search from './search';
+
 
 
 
@@ -266,7 +268,7 @@ function Row(props: { data: any }) {
 export default function CustomizedTables(props: any) {
 
   const trainingData = props.trainingData
-  const sortedData = [...trainingData];
+  
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -290,46 +292,31 @@ export default function CustomizedTables(props: any) {
   };
 
 
-
   const [sortingColumn, setSortingColumn] = useState<string | null>(null);
   const [ascending, setAscending] = useState<boolean>(true);
 
   const handleSort = (column: string) => {
     console.log("Clickable");
     console.log(column, "Column Name");
-
     console.log(sortingColumn, "SortingColumn");
-    
-    
 
     if (sortingColumn === column) {
-
       setAscending(!ascending);
-
     } else {
       console.log("setting State");
-      
-
       setSortingColumn(column);
-
       setAscending(true);
 
     }
 
   };
 
- 
-
- 
-
- 
-
   if (sortingColumn) {
     console.log("Inside if sorting Column", sortingColumn);
-    console.log(sortedData);
+    // console.log(sortedData);
     
 
-    sortedData.sort((a: any, b: any) => {
+    trainingData.sort((a: any, b: any) => {
 
       const aValue = a[sortingColumn];
 
@@ -349,8 +336,25 @@ export default function CustomizedTables(props: any) {
 
   }
 
+
+  var tbl = <table>
+    
+  </table>
+
+  const [childdata, setChildData] = useState([])
+  const callback = (data:any)=>{
+    console.log(data);
+    
+    setChildData(data);
+    console.log(childdata);
+    
+  }
+
+  // const [vari, setVari] = useState(true);
   return (
+    
     <>
+    <Search data = {trainingData} callback = {callback} />
       <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
         <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
           <TableHead>
@@ -375,8 +379,8 @@ export default function CustomizedTables(props: any) {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : sortedData
+              ? trainingData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : trainingData
             ).map((data: any) => (
               <Row key={data.trainingTitle} data={data} />
             ))}
