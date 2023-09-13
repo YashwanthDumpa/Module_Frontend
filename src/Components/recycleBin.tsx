@@ -239,7 +239,7 @@ export default function Dashboard(props: any) {
             </div>
             <div className="training">
                 <div>
-                    <h1 className="heading text-start mt-3">Dashboard</h1>
+                    <h1 className="heading text-start mt-3">Recycle Bin</h1>
                     <div className="d-flex justify-content-between main-training-box w-100 pb-4 pt-2">
                         <div className="Search">
                             <input
@@ -288,6 +288,8 @@ export default function Dashboard(props: any) {
                                     <TableCell align="center">{training.skillTitle}</TableCell>
                                     <TableCell align="center">{training.startDateTime}</TableCell>
                                     <TableCell align="center">{training.endDateTime}</TableCell>
+                                    <TableCell align="center"><button className="btn btn-sm see-more" >Restore</button> </TableCell>
+                                    
                                 </TableRow>
                             ))}
                         </TableBody>

@@ -13,7 +13,7 @@ import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import FlightIcon from "@mui/icons-material/Flight";
 import ReceiptIcon from "@mui/icons-material/Receipt";
-
+import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 import Build from '@mui/icons-material/AutoStories';
 import Arrow from '@mui/icons-material/ArrowBackIos';
 import Dashboard from './dashboard';
@@ -32,19 +32,41 @@ export default function Nav(props: any) {
         Navigate('/')
     }
 
-    const menuItems = [
-        { title: "Dashboard", icon: <DashboardIcon />, navigate:"/dashboard" },
-        { title: "Timesheet", icon: <AccessTimeIcon /> },
-        { title: "Leave", icon: <PersonOffIcon /> },
-        { title: "Work From Home", icon: <HomeWorkIcon /> },
-        { title: "Survey", icon: <AssignmentIcon /> },
-        { title: "Service Desk", icon: <LiveHelpIcon /> },
-        { title: "Forms", icon: <AssignmentTurnedInIcon /> },
-        { title: "Travel", icon: <FlightIcon /> },
-        { title: "Expenses", icon: <ReceiptIcon /> },
-        { title: "Learn & Development", icon: <Build />,navigate:"/userhome" },
-    ];
+    let menuItems;
 
+
+
+    if(window.location.pathname==="/home" || window.location.pathname==="/bin"){
+         menuItems = [
+            { title: "Dashboard", icon: <DashboardIcon /> },
+            { title: "Timesheet", icon: <AccessTimeIcon /> },
+            { title: "Leave", icon: <PersonOffIcon /> },
+            { title: "Work From Home", icon: <HomeWorkIcon /> },
+            { title: "Survey", icon: <AssignmentIcon /> },
+            { title: "Service Desk", icon: <LiveHelpIcon /> },
+            { title: "Forms", icon: <AssignmentTurnedInIcon /> },
+            { title: "Travel", icon: <FlightIcon /> },
+            { title: "Expenses", icon: <ReceiptIcon /> },
+            { title: "Learn & Development", icon: <Build />,navigate:"/home" },
+            { title: "Recycle Bin", icon: <AutoDeleteIcon />,navigate:"/bin" },
+        ];
+    
+    }else {
+        menuItems = [
+            { title: "Dashboard", icon: <DashboardIcon />, navigate:"/dashboard" },
+            { title: "Timesheet", icon: <AccessTimeIcon /> },
+            { title: "Leave", icon: <PersonOffIcon /> },
+            { title: "Work From Home", icon: <HomeWorkIcon /> },
+            { title: "Survey", icon: <AssignmentIcon /> },
+            { title: "Service Desk", icon: <LiveHelpIcon /> },
+            { title: "Forms", icon: <AssignmentTurnedInIcon /> },
+            { title: "Travel", icon: <FlightIcon /> },
+            { title: "Expenses", icon: <ReceiptIcon /> },
+            { title: "Learn & Development", icon: <Build />,navigate:"/userhome" },
+        ];
+
+    }
+    
 
     return (
         <>

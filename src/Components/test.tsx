@@ -247,13 +247,6 @@ function Row(props: { data: any }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {rows.map((historyRow) => (
-                    <TableRow key={data.skillTitle}>
-                      <TableCell component="th" scope="row">
-                        {data.description}
-                      </TableCell>
-                    </TableRow>
-                  ))} */}
                 <TableRow>
                   <TableCell sx={{ maxWidth: 180, overflowWrap: 'break-word' }}>{data.description}</TableCell>
                 </TableRow>

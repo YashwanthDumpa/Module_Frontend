@@ -8,6 +8,7 @@ import Userhome from '../Layout/Userhome';
 import CustomizedTables from '../Components/test';
 import Nav from '../Components/nav';
 import Dashboard from '../Components/dashboard';
+import RecycleBin from '../Components/recycleBin';
 
 
 const Routing: React.FC = () => {
@@ -20,6 +21,7 @@ const Routing: React.FC = () => {
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/userhome' element={<Userhome />} />
+        <Route path='/bin' element={<RecycleBin/>} />
       </Routes>
     </BrowserRouter>
   )

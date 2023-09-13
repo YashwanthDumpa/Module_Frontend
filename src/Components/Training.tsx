@@ -25,16 +25,16 @@ const Training = (props: any) => {
     return (
         <>
             <h1 className="heading text-start mt-3">Learning & Development</h1>
-            <div className="d-flex justify-content-between main-training-box w-100 p-4 bg-info">
-                <div>
+            <div className="d-flex justify-content-between main-training-box w-100 p-4">
+                
                     <input
                         type="text"
                         placeholder="Search for a training title"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    </div>
-                    <div><TrainingForm /></div>
+                    
+                    <TrainingForm />
                 </div>
                 <div className='show-mobile'>
                     {trainingData.map((data: any) =>

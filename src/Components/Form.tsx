@@ -247,7 +247,7 @@ const TrainingForm = () => {
           </div>
         ) 
         : (
-          "Working"
+          ""
         )}       
     </>
   );
