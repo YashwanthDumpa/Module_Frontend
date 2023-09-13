@@ -113,7 +113,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 
 
 
-export default function Dashboard(props: any) {
+export default function Dashboard(_props: any) {
 
 
 
@@ -132,9 +132,18 @@ export default function Dashboard(props: any) {
         const token: string | null = sessionStorage.getItem("authToken")
         console.log("token>", token);
         async function getTraining() {
-            const trainingData = await axios.get("http://localhost:8080/get-training-data", { headers: { Authorization: token } })
+            const trainingData = await axios.get("http://localhost:8080/recycle-bin", { headers: { Authorization: token } })
             console.log(trainingData.data.trainingData);
             if (trainingData.data.message === "TokenExpiredError") {
+                sessionStorage.clear()
+                Navigate("/")
+            }
+            if (trainingData.data.message === "Token Not Found") {
+                sessionStorage.clear()
+                Navigate("/")
+            }
+            if (trainingData.data.message === "Verification Failed") {
+                sessionStorage.clear()
                 Navigate("/")
             }
             console.log("From Userhome", trainingData.data.trainingData)
@@ -152,6 +161,18 @@ export default function Dashboard(props: any) {
         }
     }, []);
 
+    async function handleRestore(_title:string){
+        const token: string | null = sessionStorage.getItem("authToken")
+        try {
+            const restoreResponse = await axios.get('http://localhost:8080/restore',{headers:{Authorization:token}})
+
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+    }
+
 
 
 
@@ -164,7 +185,7 @@ export default function Dashboard(props: any) {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - trainingData.length) : 0;
 
     const handleChangePage = (
-        event: React.MouseEvent<HTMLButtonElement> | null,
+        _event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
         setPage(newPage);
@@ -288,7 +309,8 @@ export default function Dashboard(props: any) {
                                     <TableCell align="center">{training.skillTitle}</TableCell>
                                     <TableCell align="center">{training.startDateTime}</TableCell>
                                     <TableCell align="center">{training.endDateTime}</TableCell>
-                                    <TableCell align="center"><button className="btn btn-sm see-more" >Restore</button> </TableCell>
+                                    <TableCell align="center"><button className="btn btn-sm see-more" onClick={()=>{
+                                        handleRestore(training.trainingTitle)}}>Restore</button> </TableCell>
                                     
                                 </TableRow>
                             ))}
