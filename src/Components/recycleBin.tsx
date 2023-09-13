@@ -84,10 +84,22 @@ export default function Dashboard(props: any) {
         }
     }, []);
 
-    async function handleRestore(_title:string){
+    async function handleRestore(title:any){
+        console.log(title);
+        
         const token: string | null = sessionStorage.getItem("authToken")
+        console.log("restore: ",token);
+        
         try {
-            const restoreResponse = await axios.get('http://localhost:8080/restore',{headers:{Authorization:token}})
+            if(token){
+                const restoreResponse = await axios.get(`http://localhost:8080/restore/${title}`,{headers:{Authorization:token}})
+                if(restoreResponse.data.message === "Restored Successfully"){
+                    toast.success("Restored Successfully", {
+                        position: toast.POSITION.TOP_RIGHT,
+                      });
+                      window.location.reload()
+                }
+            }
 
         } catch (error) {
             console.log(error);
@@ -235,6 +247,7 @@ export default function Dashboard(props: any) {
                                             <TableCell align="center">{training.skillTitle}</TableCell>
                                             <TableCell align="center">{training.startDateTime}</TableCell>
                                             <TableCell align="center">{training.endDateTime}</TableCell>
+                                            <TableCell align="center" ><button className="btn btn-sm see-more" onClick={()=>handleRestore(training.trainingTitle)}>Restore</button></TableCell>
                                         </TableRow>
                                     ))}
                         </TableBody>
