@@ -33,16 +33,16 @@ export default function Nav(props: any) {
     }
 
     const menuItems = [
-        { title: "Dashboard", icon: <DashboardIcon />, navigate:"/dashboard" },
-        { title: "Timesheet", icon: <AccessTimeIcon /> },
-        { title: "Leave", icon: <PersonOffIcon /> },
-        { title: "Work From Home", icon: <HomeWorkIcon /> },
-        { title: "Survey", icon: <AssignmentIcon /> },
-        { title: "Service Desk", icon: <LiveHelpIcon /> },
-        { title: "Forms", icon: <AssignmentTurnedInIcon /> },
-        { title: "Travel", icon: <FlightIcon /> },
-        { title: "Expenses", icon: <ReceiptIcon /> },
-        { title: "Learn & Development", icon: <Build />,navigate:"/userhome" },
+        { title: "Dashboard", icon: <DashboardIcon className='icon' />, navigate:"/dashboard" },
+        { title: "Timesheet", icon: <AccessTimeIcon className='icon' /> },
+        { title: "Leave", icon: <PersonOffIcon className='icon' /> },
+        { title: "Work From Home", icon: <HomeWorkIcon className='icon' /> },
+        { title: "Survey", icon: <AssignmentIcon className='icon' /> },
+        { title: "Service Desk", icon: <LiveHelpIcon className='icon' /> },
+        { title: "Forms", icon: <AssignmentTurnedInIcon className='icon' /> },
+        { title: "Travel", icon: <FlightIcon className='icon' /> },
+        { title: "Expenses", icon: <ReceiptIcon className='icon' /> },
+        { title: "Learn & Development", icon: <Build className='icon' />, navigate:"/userhome" },
     ];
 
 
@@ -75,17 +75,8 @@ export default function Nav(props: any) {
                 {menuItems.map(item =>
                     <li><a href={item.navigate?item.navigate:"#"}>{item.title}</a></li>
                 )}
-
-
-                <div className="bottom">
-                    <div className="line"></div>
-
-                    <p className="username">
-                        {props.name}l
-                    </p>
-                    {/* <p className="username">Mohammed vajeeha</p> */}
-
-
+                <div className="signout">
+                    <p>Logout</p>
                 </div>
             </ul>
         </>
