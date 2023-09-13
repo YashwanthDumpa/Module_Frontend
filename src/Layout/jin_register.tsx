@@ -115,7 +115,7 @@ const Register = () => {
                     });
                 }
                 if (RegisterRequest.data.message === "email sent") {
-                    toast.error('Email Sent Successfully, click the Activation link in your email to Activate your account', {
+                    toast.success('Email Sent Successfully, click the Activation link in your email to Activate your account', {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 }

@@ -87,12 +87,12 @@ const JinSignIn = () => {
             }, 1000)
           }
           if (response.data.message === "Activation Required") {
-            toast.success('Activation Required', {
+            toast.warning('Activation Required', {
               position: toast.POSITION.TOP_RIGHT
             });
 
             setTimeout(() => {
-              Navigate('/home')
+              Navigate('/')
             }, 1000)
           }
 

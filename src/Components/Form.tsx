@@ -1,26 +1,9 @@
 import { useState } from "react";
 import "../Styles/form.css";
-
-//React Bootstrap Modal
 import TextField from "@mui/material/TextField";
-
-// The below line are commented as they are declared but never used. Please ddelete them later
-
-//For Select option element
-// import Box from "@mui/material/Box";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import Select, { SelectChangeEvent } from "@mui/material/Select";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import axios from "axios";
-import { error } from "console";
-
-
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css'
 
 const TrainingForm = () => {
@@ -104,7 +87,11 @@ const TrainingForm = () => {
     <>
       
         {window.location.pathname === "/home" ? (
-          <div>
+          <div           onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              createTraining()
+            }
+          }}>
             <button
               className="btn mybtn register"
               data-bs-toggle="modal"
