@@ -26,14 +26,12 @@ const Training = (props: any) => {
         <>
             <h1 className="heading text-start mt-3">Learning & Development</h1>
             <div className="d-flex justify-content-between main-training-box w-100 p-4">
-                
                     <input
                         type="text"
                         placeholder="Search for a training title"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    
                     <TrainingForm />
                 </div>
                 <div className='show-mobile'>
