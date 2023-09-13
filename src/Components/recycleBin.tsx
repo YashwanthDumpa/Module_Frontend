@@ -7,25 +7,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider, styled, useTheme } from '@mui/material/styles';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import { useEffect, useState } from "react";
-
-
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { Collapse, Box, Typography } from '@mui/material';
 import axios from 'axios';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import Nav from './nav';
-
+import TablePaginationActions from './tablePagination';
 
 
 
@@ -44,72 +33,6 @@ const theme = createTheme({
         },
     },
 });
-
-interface TablePaginationActionsProps {
-    count: number;
-    page: number;
-    rowsPerPage: number;
-    onPageChange: (
-        event: React.MouseEvent<HTMLButtonElement>,
-        newPage: number,
-    ) => void;
-}
-
-function TablePaginationActions(props: TablePaginationActionsProps) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
-
-    const handleFirstPageButtonClick = (
-        event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-        onPageChange(event, 0);
-    };
-
-    const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onPageChange(event, page - 1);
-    };
-
-    const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onPageChange(event, page + 1);
-    };
-
-    const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
-
-    return (
-        <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-            <IconButton
-                onClick={handleFirstPageButtonClick}
-                disabled={page === 0}
-                aria-label="first page"
-            >
-                {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-            </IconButton>
-            <IconButton
-                onClick={handleBackButtonClick}
-                disabled={page === 0}
-                aria-label="previous page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            </IconButton>
-            <IconButton
-                onClick={handleNextButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="next page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </IconButton>
-            <IconButton
-                onClick={handleLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="last page"
-            >
-                {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-            </IconButton>
-        </Box>
-    );
-}
 
 
 
@@ -132,9 +55,18 @@ export default function Dashboard(props: any) {
         const token: string | null = sessionStorage.getItem("authToken")
         console.log("token>", token);
         async function getTraining() {
-            const trainingData = await axios.get("http://localhost:8080/get-training-data", { headers: { Authorization: token } })
+            const trainingData = await axios.get("http://localhost:8080/recycle-bin", { headers: { Authorization: token } })
             console.log(trainingData.data.trainingData);
             if (trainingData.data.message === "TokenExpiredError") {
+                sessionStorage.clear()
+                Navigate("/")
+            }
+            if (trainingData.data.message === "Token Not Found") {
+                sessionStorage.clear()
+                Navigate("/")
+            }
+            if (trainingData.data.message === "Verification Failed") {
+                sessionStorage.clear()
                 Navigate("/")
             }
             console.log("From Userhome", trainingData.data.trainingData)
@@ -152,6 +84,18 @@ export default function Dashboard(props: any) {
         }
     }, []);
 
+    async function handleRestore(_title:string){
+        const token: string | null = sessionStorage.getItem("authToken")
+        try {
+            const restoreResponse = await axios.get('http://localhost:8080/restore',{headers:{Authorization:token}})
+
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+    }
+
 
 
 
@@ -164,7 +108,7 @@ export default function Dashboard(props: any) {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - trainingData.length) : 0;
 
     const handleChangePage = (
-        event: React.MouseEvent<HTMLButtonElement> | null,
+        _event: React.MouseEvent<HTMLButtonElement> | null,
         newPage: number,
     ) => {
         setPage(newPage);
@@ -276,22 +220,23 @@ export default function Dashboard(props: any) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {filteredData.map((training: any) => (
-                                <TableRow
-                                    key={training.trainingTitle}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row" align="center">
-                                        {training.trainingTitle}
-                                    </TableCell>
-                                    <TableCell align="center">{training.trainingTitle}</TableCell>
-                                    <TableCell align="center">{training.skillTitle}</TableCell>
-                                    <TableCell align="center">{training.startDateTime}</TableCell>
-                                    <TableCell align="center">{training.endDateTime}</TableCell>
-                                    <TableCell align="center"><button className="btn btn-sm see-more" >Restore</button> </TableCell>
-                                    
-                                </TableRow>
-                            ))}
+                            {(rowsPerPage > 0
+                                ? filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                : filteredData)
+                                    .map((training: any) => (
+                                        <TableRow
+                                            key={training.trainingTitle}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center">
+                                                {training.trainingTitle}
+                                            </TableCell>
+                                            <TableCell align="center">{training.trainingTitle}</TableCell>
+                                            <TableCell align="center">{training.skillTitle}</TableCell>
+                                            <TableCell align="center">{training.startDateTime}</TableCell>
+                                            <TableCell align="center">{training.endDateTime}</TableCell>
+                                        </TableRow>
+                                    ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

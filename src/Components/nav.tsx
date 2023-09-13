@@ -91,7 +91,7 @@ export default function Nav(props: any) {
                 {menuItems.map(item =>
                     <li><a href={item.navigate?item.navigate:"#"}>{item.title}</a></li>
                 )}
-                <div className="signout">
+                <div className="signout" onClick={handleLogout}>
                     <p>Logout</p>
                 </div>
             </ul>

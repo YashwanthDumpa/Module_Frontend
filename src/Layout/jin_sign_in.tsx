@@ -86,6 +86,15 @@ const JinSignIn = () => {
               Navigate('/home')
             }, 1000)
           }
+          if (response.data.message === "Activation Required") {
+            toast.warning('Activation Required', {
+              position: toast.POSITION.TOP_RIGHT
+            });
+
+            setTimeout(() => {
+              Navigate('/')
+            }, 1000)
+          }
 
           if (response.data.message === "password not matching") {
             toast.error('Invalid User', {
