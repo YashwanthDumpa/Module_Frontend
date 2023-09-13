@@ -32,16 +32,16 @@ export default function Nav(props: any) {
     }
 
     const menuItems = [
-        { title: "Dashboard", icon: <DashboardIcon /> },
-        { title: "Timesheet", icon: <AccessTimeIcon /> },
-        { title: "Leave", icon: <PersonOffIcon /> },
-        { title: "Work From Home", icon: <HomeWorkIcon /> },
-        { title: "Survey", icon: <AssignmentIcon /> },
-        { title: "Service Desk", icon: <LiveHelpIcon /> },
-        { title: "Forms", icon: <AssignmentTurnedInIcon /> },
-        { title: "Travel", icon: <FlightIcon /> },
-        { title: "Expenses", icon: <ReceiptIcon /> },
-        { title: "Learn & Development", icon: <Build /> },
+        { title: "Dashboard", icon: <DashboardIcon  className='icon'/> },
+        { title: "Timesheet", icon: <AccessTimeIcon  className='icon'/> },
+        { title: "Leave", icon: <PersonOffIcon  className='icon'/> },
+        { title: "Work From Home", icon: <HomeWorkIcon  className='icon'/> },
+        { title: "Survey", icon: <AssignmentIcon  className='icon'/> },
+        { title: "Service Desk", icon: <LiveHelpIcon  className='icon'/> },
+        { title: "Forms", icon: <AssignmentTurnedInIcon  className='icon'/> },
+        { title: "Travel", icon: <FlightIcon  className='icon'/> },
+        { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
+        { title: "Learn & Development", icon: <Build  className='icon'/> },
     ];
 
 
@@ -49,7 +49,7 @@ export default function Nav(props: any) {
         <>
             <ul className='menu'>
                 <a href='https://jmangroup.com/' target="_blank"><img src={logo} className='logo' /></a>
-                <li title="home"><a href="#" onClick={handleClick} className='menu-btn'><Menu /></a></li>
+                <li title="home"><a href="#" onClick={handleClick} className='menu-btn'><Menu  className='icon'/></a></li>
                 {menuItems.map(item =>
                     <li title={item.title}><a href='#' className={item.title}>{item.icon}</a></li>
                 )}
@@ -69,7 +69,8 @@ export default function Nav(props: any) {
                 <p className="username">
                     {props.name}
                 </p>
-                <li><a href="#" className="close-btn" onClick={handleClick}><Arrow sx={{ fontSize: 20 }} /></a></li>
+                {/* sx={{ fontSize: 20 }} */}
+                <li><a href="#" className="close-btn" onClick={handleClick}><Arrow className='icon'/></a></li>
                 {menuItems.map(item =>
                     <li><a href='#' onClick={handleClick}>{item.title}</a></li>
                 )}
