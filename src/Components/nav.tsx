@@ -97,17 +97,8 @@ export default function Nav(props: any) {
                 {menuItems.map(item =>
                     <li><a href={item.navigate?item.navigate:"#"}>{item.title}</a></li>
                 )}
-
-
-                <div className="bottom">
-                    <div className="line"></div>
-
-                    <p className="username">
-                        {props.name}l
-                    </p>
-                    {/* <p className="username">Mohammed vajeeha</p> */}
-
-
+                <div className="signout">
+                    <p>Logout</p>
                 </div>
             </ul>
         </>
