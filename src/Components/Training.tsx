@@ -10,48 +10,44 @@ import CustomizedTables from './test';
 import '../Styles/training.css';
 
 
-const Training: React.FC = () => {
-    const Navigate = useNavigate()
+const Training = (props: any) => {
+    const trainingData = props.trainingData;
 
-    const [tokendata, setTokendata] = useState('')
-    const [trainingData, setTrainingData] = useState([])
 
-    useEffect(() => {
-        const token: string | null = sessionStorage.getItem("authToken")
-        console.log("token>", token);
-        async function getTraining() {
-            const trainingData = await axios.get("http://localhost:8080/get-training-data", { headers: { Authorization: token } })
-            console.log(trainingData.data.trainingData);
-            if(trainingData.data.message === "TokenExpiredError"){
-                Navigate("/")
-            }
-            setTrainingData(trainingData.data.trainingData)
-        }
+    
+  const [searchTerm, setSearchTerm] = useState('');
 
-        if (token !== null) {
-            setTokendata(token)
-            getTraining()
-        } else {
-            sessionStorage.clear()
-            Navigate('/')
-        }
-    }, []);
+  // Filter training titles based on the search term
+  const filteredTraining = trainingData.filter((training:any) => {
+    return training.trainingTitle.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
     return (
         <>
-            <TrainingForm />
-            <div className='show-mobile'>
-            {trainingData.map(data =>
-                <div className="p-3">
-                    < Card tdata={data} />
+            <h1 className="heading text-start mt-3">Learning & Development</h1>
+            <div className="d-flex justify-content-between main-training-box w-100 p-4">
+                
+                    <input
+                        type="text"
+                        placeholder="Search for a training title"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    
+                    <TrainingForm />
                 </div>
-            )}
-            </div>
-            <div className='show-monitor'>
-                <CustomizedTables trainingData={trainingData} />
-            </div>
-        </>
-    );
+                <div className='show-mobile'>
+                    {trainingData.map((data: any) =>
+                        <div className="p-3">
+                            < Card tdata={data} />
+                        </div>
+                    )}
+                </div>
+                <div className='show-monitor'>
+                    <CustomizedTables trainingData={filteredTraining} />
+                </div>
+            </>
+            );
 }
 
-export default Training
+            export default Training

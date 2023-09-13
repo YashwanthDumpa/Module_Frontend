@@ -7,21 +7,21 @@ import Userhome from '../Layout/Userhome';
 
 import CustomizedTables from '../Components/test';
 import Nav from '../Components/nav';
+import Dashboard from '../Components/dashboard';
+import RecycleBin from '../Components/recycleBin';
 
 
 const Routing: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-
-      {/* <Route path='/' element={<CustomizedTables />} /> */}
         <Route path='/' element={<JinSignIn />} />
         <Route path='/b' element={<Nav />} />
-
         <Route path='/register' element={<Register />} />
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/home' element={<Home />} />
         <Route path='/userhome' element={<Userhome />} />
-
+        <Route path='/bin' element={<RecycleBin/>} />
       </Routes>
     </BrowserRouter>
   )

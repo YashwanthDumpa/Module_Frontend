@@ -102,13 +102,7 @@ const TrainingForm = () => {
 
   return (
     <>
-      <div >
-      <h1 className="heading text-start mt-3">Learning & Development</h1>
-      <div className="d-flex justify-content-between main-training-box w-100 p-4">
-        <div className="Search">
-          <h1>Search</h1>
-
-        </div>
+      
         {window.location.pathname === "/home" ? (
           <div>
             <button
@@ -254,11 +248,7 @@ const TrainingForm = () => {
         ) 
         : (
           ""
-        )}
-      </div>
-
-       
-      </div>
+        )}       
     </>
   );
 };

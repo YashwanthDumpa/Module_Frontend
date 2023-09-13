@@ -73,7 +73,7 @@ const JinSignIn = () => {
             });
 
             setTimeout(() => {
-              Navigate('/userhome')
+              Navigate('/dashboard')
             }, 1000)
           }
           if (response.data.message === "Login-admin") {
