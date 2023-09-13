@@ -235,15 +235,13 @@ function Row(props: { data: any }) {
           </IconButton>
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow >
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Table size="small" aria-label="purchases">
               <TableHead>
                 <TableRow>
-                  <ThemeProvider theme={theme}>
-                    <CustomCheckbox>Description</CustomCheckbox>
-                  </ThemeProvider>
+                    <CustomCheckbox style={{background: '#FFE5EE', color: '#19105B'}}>Description</CustomCheckbox>
                 </TableRow>
               </TableHead>
               <TableBody>

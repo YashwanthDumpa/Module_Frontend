@@ -32,39 +32,33 @@ export default function Nav(props: any) {
         Navigate('/')
     }
 
-    let menuItems;
-
-
+    let menuItems = [
+        { title: "Dashboard", icon: <DashboardIcon className='icon'/>, navigate:"/dashboard" },
+        { title: "Timesheet", icon: <AccessTimeIcon className='icon'/> },
+        { title: "Leave", icon: <PersonOffIcon className='icon'/> },
+        { title: "Work From Home", icon: <HomeWorkIcon className='icon'/> },
+        { title: "Survey", icon: <AssignmentIcon className='icon'/> },
+        { title: "Service Desk", icon: <LiveHelpIcon className='icon'/> },
+        { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
+        { title: "Travel", icon: <FlightIcon className='icon'/> },
+        { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
+        { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/userhome" },
+    ];
 
     if(window.location.pathname==="/home" || window.location.pathname==="/bin"){
          menuItems = [
-            { title: "Dashboard", icon: <DashboardIcon /> },
-            { title: "Timesheet", icon: <AccessTimeIcon /> },
-            { title: "Leave", icon: <PersonOffIcon /> },
-            { title: "Work From Home", icon: <HomeWorkIcon /> },
-            { title: "Survey", icon: <AssignmentIcon /> },
-            { title: "Service Desk", icon: <LiveHelpIcon /> },
-            { title: "Forms", icon: <AssignmentTurnedInIcon /> },
-            { title: "Travel", icon: <FlightIcon /> },
-            { title: "Expenses", icon: <ReceiptIcon /> },
-            { title: "Learn & Development", icon: <Build />,navigate:"/home" },
-            { title: "Recycle Bin", icon: <AutoDeleteIcon />,navigate:"/bin" },
+            { title: "Dashboard", icon: <DashboardIcon className='icon'/> },
+            { title: "Timesheet", icon: <AccessTimeIcon className='icon'/> },
+            { title: "Leave", icon: <PersonOffIcon className='icon'/> },
+            { title: "Work From Home", icon: <HomeWorkIcon className='icon'/> },
+            { title: "Survey", icon: <AssignmentIcon className='icon'/> },
+            { title: "Service Desk", icon: <LiveHelpIcon className='icon'/> },
+            { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
+            { title: "Travel", icon: <FlightIcon className='icon'/> },
+            { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
+            { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/home" },
+            { title: "Recycle Bin", icon: <AutoDeleteIcon className='icon'/>,navigate:"/bin" },
         ];
-    
-    }else {
-        menuItems = [
-            { title: "Dashboard", icon: <DashboardIcon />, navigate:"/dashboard" },
-            { title: "Timesheet", icon: <AccessTimeIcon /> },
-            { title: "Leave", icon: <PersonOffIcon /> },
-            { title: "Work From Home", icon: <HomeWorkIcon /> },
-            { title: "Survey", icon: <AssignmentIcon /> },
-            { title: "Service Desk", icon: <LiveHelpIcon /> },
-            { title: "Forms", icon: <AssignmentTurnedInIcon /> },
-            { title: "Travel", icon: <FlightIcon /> },
-            { title: "Expenses", icon: <ReceiptIcon /> },
-            { title: "Learn & Development", icon: <Build />,navigate:"/userhome" },
-        ];
-
     }
     
 
