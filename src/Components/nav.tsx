@@ -16,6 +16,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 
 import Build from '@mui/icons-material/AutoStories';
 import Arrow from '@mui/icons-material/ArrowBackIos';
+import Dashboard from './dashboard';
 
 
 
@@ -32,7 +33,7 @@ export default function Nav(props: any) {
     }
 
     const menuItems = [
-        { title: "Dashboard", icon: <DashboardIcon /> },
+        { title: "Dashboard", icon: <DashboardIcon />, navigate:"/dashboard" },
         { title: "Timesheet", icon: <AccessTimeIcon /> },
         { title: "Leave", icon: <PersonOffIcon /> },
         { title: "Work From Home", icon: <HomeWorkIcon /> },
@@ -41,7 +42,7 @@ export default function Nav(props: any) {
         { title: "Forms", icon: <AssignmentTurnedInIcon /> },
         { title: "Travel", icon: <FlightIcon /> },
         { title: "Expenses", icon: <ReceiptIcon /> },
-        { title: "Learn & Development", icon: <Build /> },
+        { title: "Learn & Development", icon: <Build />,navigate:"/userhome" },
     ];
 
 
@@ -52,7 +53,7 @@ export default function Nav(props: any) {
                 <img src={logo} className='logo' />
                 <li title="home"><a href="#" onClick={handleClick}><Menu /></a></li>
                 {menuItems.map(item =>
-                    <li title={item.title}><a href='#' className={item.title}>{item.icon}</a></li>
+                    <li title={item.title}><a href={item.navigate?item.navigate:"#"} className={item.title}>{item.icon}</a></li>
                 )}
                 <div className="signout" onClick={handleLogout}>
                         <button className="butn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -67,7 +68,7 @@ export default function Nav(props: any) {
                 <p className='logo-space'></p>
                 <li><a href="#" className="close-btn" onClick={handleClick}><Arrow /></a></li>
                 {menuItems.map(item =>
-                    <li><a href='#'>{item.title}</a></li>
+                    <li><a href={item.navigate?item.navigate:"#"}>{item.title}</a></li>
                 )}
 
 
@@ -75,7 +76,7 @@ export default function Nav(props: any) {
                     <div className="line"></div>
 
                     <p className="username">
-                        {props.name}
+                        {props.name}l
                     </p>
                     {/* <p className="username">Mohammed vajeeha</p> */}
 

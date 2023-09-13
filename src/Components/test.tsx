@@ -29,6 +29,8 @@ import { ToastContainer, toast } from "react-toastify";
 
 
 import Search from './search';
+import { useNavigate } from 'react-router-dom';
+import Nav from './nav';
 
 
 
@@ -127,39 +129,39 @@ function Row(props: { data: any }) {
   }, []);
 
 
-  
-  async function handleDelete(trainingTitle:any){
+
+  async function handleDelete(trainingTitle: any) {
 
     try {
 
 
-        const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`,{headers:{Authorization:tokendata}})
+      const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`, { headers: { Authorization: tokendata } })
 
-        console.log(send.data.message);
+      console.log(send.data.message);
 
-        if(send.data.message === "Deleted Successfully"){
+      if (send.data.message === "Deleted Successfully") {
 
-            toast.success("Deleted Successfully", {
+        toast.success("Deleted Successfully", {
 
-                position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_RIGHT,
 
-              });
+        });
 
-             
 
-              window.location.reload()
 
-        }
+        window.location.reload()
+
+      }
 
     } catch (error) {
 
-        console.log(error);
+      console.log(error);
 
-       
+
 
     }
 
-}
+  }
 
   async function handleTraining(trainingTitled: any) {
 
@@ -218,10 +220,10 @@ function Row(props: { data: any }) {
         <TableCell align="center">{data.startDateTime}</TableCell>
         <TableCell align="center">{data.endDateTime}</TableCell>
         <TableCell>
-          {window.location.pathname === '/home'?<button className="btn btn-sm see-more" onClick={() => handleDelete(data.trainingTitle)}>Delete</button>:<button className="btn btn-sm see-more" onClick={() => handleTraining(data.trainingTitle)}>
-          Register
-        </button>}
-          </TableCell>
+          {window.location.pathname === '/home' ? <button className="btn btn-sm see-more" onClick={() => handleDelete(data.trainingTitle)}>Delete</button> : <button className="btn btn-sm see-more" onClick={() => handleTraining(data.trainingTitle)}>
+            Register
+          </button>}
+        </TableCell>
 
         <TableCell>
           <IconButton
@@ -268,7 +270,7 @@ function Row(props: { data: any }) {
 export default function CustomizedTables(props: any) {
 
   const trainingData = props.trainingData
-  
+
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -314,7 +316,7 @@ export default function CustomizedTables(props: any) {
   if (sortingColumn) {
     console.log("Inside if sorting Column", sortingColumn);
     // console.log(sortedData);
-    
+
 
     trainingData.sort((a: any, b: any) => {
 
@@ -337,76 +339,63 @@ export default function CustomizedTables(props: any) {
   }
 
 
-  var tbl = <table>
-    
-  </table>
 
-  const [childdata, setChildData] = useState([])
-  const callback = (data:any)=>{
-    console.log(data);
-    
-    setChildData(data);
-    console.log(childdata);
-    
-  }
 
-  // const [vari, setVari] = useState(true);
   return (
-    
     <>
-    <Search data = {trainingData} callback = {callback} />
-      <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
-        <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <ThemeProvider theme={theme}>
-                <CustomCheckbox align="center" >Training Title <SwapVertIcon style={{ fontSize: '20px' }} onClick={() => handleSort('trainingTitle')} /></CustomCheckbox>
+        <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
+          <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <ThemeProvider theme={theme}>
+                  <CustomCheckbox align="center" >Training Title <SwapVertIcon style={{ fontSize: '20px' }} onClick={() => handleSort('trainingTitle')} /></CustomCheckbox>
 
-                <CustomCheckbox align="center" onClick={() => handleSort('skillTitle')}>Skill Title <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                  <CustomCheckbox align="center" onClick={() => handleSort('skillTitle')}>Skill Title <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                  <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                  <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                  <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                <CustomCheckbox align="center">Button</CustomCheckbox>
+                  <CustomCheckbox align="center">Button</CustomCheckbox>
 
-                <CustomCheckbox></CustomCheckbox>
+                  <CustomCheckbox></CustomCheckbox>
 
-              </ThemeProvider>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? trainingData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : trainingData
-            ).map((data: any) => (
-              <Row key={data.trainingTitle} data={data} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Paper sx={{ minHeight: 40 }} className='d-flex justify-content-end'>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-          colSpan={3}
-          count={trainingData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          SelectProps={{
-            inputProps: {
-              'aria-label': 'rows per page',
-            },
-            native: true,
-          }}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          ActionsComponent={TablePaginationActions}
-        />
-      </Paper>
+                </ThemeProvider>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(rowsPerPage > 0
+                ? trainingData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                : trainingData
+              ).map((data: any) => (
+                <Row key={data.trainingTitle} data={data} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Paper sx={{ minHeight: 40 }} className='d-flex justify-content-end'>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+            colSpan={3}
+            count={trainingData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            SelectProps={{
+              inputProps: {
+                'aria-label': 'rows per page',
+              },
+              native: true,
+            }}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            ActionsComponent={TablePaginationActions}
+          />
+        </Paper>
 
-      <ToastContainer />
+        <ToastContainer />
+
     </>
   );
 }
