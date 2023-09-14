@@ -42,10 +42,10 @@ export default function Nav(props: any) {
         { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
         { title: "Travel", icon: <FlightIcon className='icon'/> },
         { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
-        { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/userhome" },
+        { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/LearningDevelopment" },
     ];
 
-    if(window.location.pathname==="/home" || window.location.pathname==="/bin"){
+    if(window.location.pathname==="/adminLearningDevelopment" || window.location.pathname==="/bin"){
          menuItems = [
             { title: "Dashboard", icon: <DashboardIcon className='icon'/> },
             { title: "Timesheet", icon: <AccessTimeIcon className='icon'/> },
@@ -56,7 +56,7 @@ export default function Nav(props: any) {
             { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
             { title: "Travel", icon: <FlightIcon className='icon'/> },
             { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
-            { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/home" },
+            { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/adminLearningDevelopment" },
             { title: "Recycle Bin", icon: <AutoDeleteIcon className='icon'/>,navigate:"/bin" },
         ];
     }

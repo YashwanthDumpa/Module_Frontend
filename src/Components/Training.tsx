@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-
+import  {  useState } from 'react';
 import '../Styles/LandDScreen.css';
 import Card from './card';
 import TrainingForm from './Form';
-import CustomizedTables from './test';
-
+import TrainingTable from './trainingTable';
 import '../Styles/training.css';
-
 import SearchIcon from '@mui/icons-material/Search';
 
 const Training = (props: any) => {
@@ -47,7 +42,7 @@ const Training = (props: any) => {
                 )}
             </div>
             <div className='show-monitor'>
-                <CustomizedTables trainingData={filteredTraining} />
+                <TrainingTable trainingData={filteredTraining} />
             </div>
         </div>
     );

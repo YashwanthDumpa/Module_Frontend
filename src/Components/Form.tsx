@@ -86,7 +86,7 @@ const TrainingForm = () => {
   return (
     <>
       
-        {window.location.pathname === "/home" ? (
+        {window.location.pathname === "/adminLearningDevelopment" ? (
           <div           onKeyDown={(e) => {
             if (e.key === "Enter") {
               createTraining()

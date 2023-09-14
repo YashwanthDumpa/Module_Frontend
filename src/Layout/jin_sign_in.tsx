@@ -83,7 +83,7 @@ const JinSignIn = () => {
             });
 
             setTimeout(() => {
-              Navigate('/home')
+              Navigate('/adminLearningDevelopment')
             }, 1000)
           }
           if (response.data.message === "Activation Required") {
