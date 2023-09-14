@@ -144,3 +144,4 @@ export default function TrainingTable(props: any) {
     </>
   );
 }
+

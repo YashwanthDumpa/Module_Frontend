@@ -16,6 +16,9 @@ import { useNavigate } from 'react-router-dom';
 import Nav from './nav';
 import TablePaginationActions from './tablePagination';
 
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 
 
 const CustomCheckbox = styled(TableCell)(({ theme }) => ({
@@ -84,20 +87,20 @@ export default function RecycleBin(props: any) {
         }
     }, []);
 
-    async function handleRestore(title:any){
+    async function handleRestore(title: any) {
         console.log(title);
-        
+
         const token: string | null = sessionStorage.getItem("authToken")
-        console.log("restore: ",token);
-        
+        console.log("restore: ", token);
+
         try {
-            if(token){
-                const restoreResponse = await axios.get(`http://localhost:8080/restore/${title}`,{headers:{Authorization:token}})
-                if(restoreResponse.data.message === "Restored Successfully"){
+            if (token) {
+                const restoreResponse = await axios.get(`http://localhost:8080/restore/${title}`, { headers: { Authorization: token } })
+                if (restoreResponse.data.message === "Restored Successfully") {
                     toast.success("Restored Successfully", {
                         position: toast.POSITION.TOP_RIGHT,
-                      });
-                      window.location.reload()
+                    });
+                    window.location.reload()
                 }
             }
 
@@ -193,15 +196,18 @@ export default function RecycleBin(props: any) {
                 <div>
                     <h1 className="heading text-start mt-3">Recycle Bin</h1>
                     <div className="d-flex justify-content-between main-training-box w-100 pb-4 pt-2">
-                        <div className="Search">
-                            <input
-                                type="text"
-                                placeholder="Search for training title"
-                                value={searchTerm}
-                                onChange={(e) =>
-                                    setSearchTerm(e.target.value)}
+                        <abbr title='Search for a training title' style={{ textDecoration: 'none', backgroundColor: "rgb(245,250,250)" }}>
+
+                            <TextField
+                                label="" size="small" placeholder='Search...'
+                                id="outlined-start-adornment" value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                sx={{ maxHeight: 30 }}
+                                InputProps={{
+                                    endAdornment: <InputAdornment position="end"><SearchIcon sx={{ height: 20 }} /></InputAdornment>,
+                                }}
                             />
-                        </div>
+                        </abbr>
                     </div>
                 </div>
                 <div className="container-fluid pe-4">
@@ -243,7 +249,7 @@ export default function RecycleBin(props: any) {
                                             <TableCell align="center">{training.skillTitle}</TableCell>
                                             <TableCell align="center">{training.startDateTime}</TableCell>
                                             <TableCell align="center">{training.endDateTime}</TableCell>
-                                            <TableCell align="center" ><button className="btn btn-sm see-more" onClick={()=>handleRestore(training.trainingTitle)}>Restore</button></TableCell>
+                                            <TableCell align="center" ><button className="btn btn-sm see-more" onClick={() => handleRestore(training.trainingTitle)}>Restore</button></TableCell>
                                         </TableRow>
                                     ))}
                             </TableBody>

@@ -1,0 +1,32 @@
+.search{
+    width:22%;
+    height: 30px;
+    color: #6a6c71;
+    background-color: rgb(250, 255, 255);
+    border: 1px solid #c0c2c9;
+    
+}
+
+.search abbr{
+    height: 30px;
+    width: 100%;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+.search input{
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #c0c2c9;
+    outline: none;
+    background-color: rgb(250, 255, 255);
+    width: 90%;
+}
+
+.search-icon{
+    height: 30px !important;
+    width: 10% !important;
+    border: none !important;
+    color: #9fa0a5
+}
