@@ -121,7 +121,7 @@ function Row(props: { data: any }) {
           <TableCell align="center">{data.startDateTime}</TableCell>
           <TableCell align="center">{data.endDateTime}</TableCell>
           <TableCell>
-            {window.location.pathname === '/home' ? <button className="btn btn-sm see-more text-light" onClick={() => handleDelete(data.trainingTitle)}>Delete</button> : <button className="btn btn-sm see-more text-light" onClick={() => handleTraining(data.trainingTitle)}>
+            {window.location.pathname === '/adminLearningDevelopment' ? <button className="btn btn-sm see-more text-light" onClick={() => handleDelete(data.trainingTitle)}>Delete</button> : <button className="btn btn-sm see-more text-light" onClick={() => handleTraining(data.trainingTitle)}>
               Register
             </button>}
           </TableCell>

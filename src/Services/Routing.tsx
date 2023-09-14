@@ -4,9 +4,6 @@ import JinSignIn from '../Layout/jin_sign_in';
 import Home from '../Components/home';
 import Register from '../Layout/jin_register';
 import Userhome from '../Layout/Userhome';
-
-import CustomizedTables from '../Components/test';
-import Nav from '../Components/nav';
 import Dashboard from '../Components/dashboard';
 import RecycleBin from '../Components/recycleBin';
 
@@ -16,11 +13,10 @@ const Routing: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<JinSignIn />} />
-        <Route path='/b' element={<Nav />} />
         <Route path='/register' element={<Register />} />
         <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/home' element={<Home />} />
-        <Route path='/userhome' element={<Userhome />} />
+        <Route path='/adminLearningDevelopment' element={<Home />} />
+        <Route path='/LearningDevelopment' element={<Userhome />} />
         <Route path='/bin' element={<RecycleBin/>} />
       </Routes>
     </BrowserRouter>

@@ -36,7 +36,7 @@ const theme = createTheme({
 
 
 
-export default function Dashboard(props: any) {
+export default function RecycleBin(props: any) {
 
 
 
@@ -84,21 +84,17 @@ export default function Dashboard(props: any) {
         }
     }, []);
 
-    async function handleRestore(_title:string){
+    async function handleRestore(_title: string) {
         const token: string | null = sessionStorage.getItem("authToken")
         try {
-            const restoreResponse = await axios.get('http://localhost:8080/restore',{headers:{Authorization:token}})
+            const restoreResponse = await axios.get('http://localhost:8080/restore', { headers: { Authorization: token } })
 
         } catch (error) {
             console.log(error);
-            
+
         }
 
     }
-
-
-
-
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -196,33 +192,33 @@ export default function Dashboard(props: any) {
                         </div>
                     </div>
                 </div>
+                <div className="container-fluid pe-4">
+                    <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
+                        <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <ThemeProvider theme={theme}>
+                                        <CustomCheckbox align="center" >Training Title <SwapVertIcon style={{ fontSize: '20px' }} onClick={() => handleSort('trainingTitle')} /></CustomCheckbox>
 
-                <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
-                    <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <ThemeProvider theme={theme}>
-                                    <CustomCheckbox align="center" >Training Title <SwapVertIcon style={{ fontSize: '20px' }} onClick={() => handleSort('trainingTitle')} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('skillTitle')}>Skill Title <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('skillTitle')}>Skill Title <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center">Button</CustomCheckbox>
 
-                                    <CustomCheckbox align="center">Button</CustomCheckbox>
+                                        <CustomCheckbox></CustomCheckbox>
 
-                                    <CustomCheckbox></CustomCheckbox>
-
-                                </ThemeProvider>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {(rowsPerPage > 0
-                                ? filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : filteredData)
+                                    </ThemeProvider>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {(rowsPerPage > 0
+                                    ? filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    : filteredData)
                                     .map((training: any) => (
                                         <TableRow
                                             key={training.trainingTitle}
@@ -237,30 +233,30 @@ export default function Dashboard(props: any) {
                                             <TableCell align="center">{training.endDateTime}</TableCell>
                                         </TableRow>
                                     ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Paper sx={{ minHeight: 40 }} className='d-flex justify-content-end'>
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                        colSpan={3}
-                        count={trainingData.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        SelectProps={{
-                            inputProps: {
-                                'aria-label': 'rows per page',
-                            },
-                            native: true,
-                        }}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                        ActionsComponent={TablePaginationActions}
-                    />
-                </Paper>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <Paper sx={{ minHeight: 40 }} className='d-flex justify-content-end'>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                            colSpan={3}
+                            count={trainingData.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            SelectProps={{
+                                inputProps: {
+                                    'aria-label': 'rows per page',
+                                },
+                                native: true,
+                            }}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                            ActionsComponent={TablePaginationActions}
+                        />
+                    </Paper>
 
-                <ToastContainer />
-
+                    <ToastContainer />
+                </div>
 
             </div>
         </>

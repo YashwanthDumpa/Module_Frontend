@@ -37,7 +37,7 @@ const theme = createTheme({
 
 
 
-export default function Dashboard(props: any) {
+export default function Dashboard() {
 
 
 
@@ -161,7 +161,7 @@ export default function Dashboard(props: any) {
             <div className="navigation">
                 <Nav name={userName} />
             </div>
-            <div className="training">
+            <div className="training ">
                 <div>
                     <h1 className="heading text-start mt-3">Dashboard</h1>
                     <div className="d-flex justify-content-between main-training-box w-100 pb-4 pt-2">
@@ -176,7 +176,7 @@ export default function Dashboard(props: any) {
                         </div>
                     </div>
                 </div>
-
+                <div className='container-fluid pe-4'>
                 <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
                     <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
                         <TableHead>
@@ -241,7 +241,7 @@ export default function Dashboard(props: any) {
 
                 <ToastContainer />
 
-
+                </div>
             </div>
         </>
     );

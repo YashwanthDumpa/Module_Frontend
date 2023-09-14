@@ -37,7 +37,7 @@ const theme = createTheme({
 
 
 
-export default function CustomizedTables(props: any) {
+export default function TrainingTable(props: any) {
 
   const trainingData = props.trainingData
 
