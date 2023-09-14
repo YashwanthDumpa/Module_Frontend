@@ -199,7 +199,7 @@ export default function Dashboard() {
 
                                         <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                        <CustomCheckbox align="center">Button</CustomCheckbox>
+                                    <CustomCheckbox align="center">Registered Date and Time</CustomCheckbox>
 
                                         <CustomCheckbox></CustomCheckbox>
 
@@ -222,6 +222,7 @@ export default function Dashboard() {
                                             <TableCell align="center">{training.skillTitle}</TableCell>
                                             <TableCell align="center">{training.startDateTime}</TableCell>
                                             <TableCell align="center">{training.endDateTime}</TableCell>
+                                            <TableCell align="center">{training.RegisteredDateTime}</TableCell>
                                         </TableRow>
                                     ))}
                             </TableBody>
