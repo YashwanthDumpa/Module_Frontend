@@ -16,7 +16,9 @@ import { useNavigate } from 'react-router-dom';
 import Nav from './nav';
 import TablePaginationActions from './tablePagination';
 
-
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 
 const CustomCheckbox = styled(TableCell)(({ theme }) => ({
     color: "white",
@@ -165,44 +167,49 @@ export default function Dashboard() {
                 <div>
                     <h1 className="heading text-start mt-3">Dashboard</h1>
                     <div className="d-flex justify-content-between main-training-box w-100 pb-4 pt-2">
-                        <div className="Search">
-                            <input
-                                type="text"
-                                placeholder="Search for training title"
-                                value={searchTerm}
-                                onChange={(e) =>
-                                    setSearchTerm(e.target.value)}
+                        <abbr
+                            title='Search for a training title'
+                            style={{ textDecoration: 'none', backgroundColor: "rgb(245,250,250)" }}
+                        >
+                            <TextField
+                                label="" size="small" placeholder='Search...'
+                                id="outlined-start-adornment" value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                sx={{ maxHeight: 30 }}
+                                InputProps={{
+                                    endAdornment: <InputAdornment position="end"><SearchIcon sx={{ height: 20 }} /></InputAdornment>,
+                                }}
                             />
-                        </div>
+                        </abbr>
                     </div>
                 </div>
                 <div className='container-fluid pe-4'>
-                <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
-                    <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <ThemeProvider theme={theme}>
-                                    <CustomCheckbox align="center" >Training Title <SwapVertIcon style={{ fontSize: '20px' }} onClick={() => handleSort('trainingTitle')} /></CustomCheckbox>
+                    <TableContainer component={Paper} sx={{ maxHeight: 460 }}>
+                        <Table stickyHeader sx={{ minWidth: 650 }} size="small" aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <ThemeProvider theme={theme}>
+                                        <CustomCheckbox align="center" >Training Title <SwapVertIcon style={{ fontSize: '20px' }} onClick={() => handleSort('trainingTitle')} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('skillTitle')}>Skill Title <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('skillTitle')}>Skill Title <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
+                                        <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
 
-                                    <CustomCheckbox align="center">Button</CustomCheckbox>
+                                        <CustomCheckbox align="center">Button</CustomCheckbox>
 
-                                    <CustomCheckbox></CustomCheckbox>
+                                        <CustomCheckbox></CustomCheckbox>
 
-                                </ThemeProvider>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {(rowsPerPage > 0
-                                ? filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                : filteredData)
+                                    </ThemeProvider>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {(rowsPerPage > 0
+                                    ? filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    : filteredData)
                                     .map((training: any) => (
                                         <TableRow
                                             key={training.trainingTitle}
@@ -217,29 +224,29 @@ export default function Dashboard() {
                                             <TableCell align="center">{training.endDateTime}</TableCell>
                                         </TableRow>
                                     ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Paper sx={{ minHeight: 40 }} className='d-flex justify-content-end'>
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                        colSpan={3}
-                        count={trainingData.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        SelectProps={{
-                            inputProps: {
-                                'aria-label': 'rows per page',
-                            },
-                            native: true,
-                        }}
-                        onPageChange={handleChangePage}
-                        onRowsPerPageChange={handleChangeRowsPerPage}
-                        ActionsComponent={TablePaginationActions}
-                    />
-                </Paper>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <Paper sx={{ minHeight: 40 }} className='d-flex justify-content-end'>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                            colSpan={3}
+                            count={trainingData.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            SelectProps={{
+                                inputProps: {
+                                    'aria-label': 'rows per page',
+                                },
+                                native: true,
+                            }}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                            ActionsComponent={TablePaginationActions}
+                        />
+                    </Paper>
 
-                <ToastContainer />
+                    <ToastContainer />
 
                 </div>
             </div>
