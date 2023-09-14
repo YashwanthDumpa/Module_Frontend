@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import '../Styles/card.css'
 
 export default function Card(props: any) {
- 
+ const [count, setCount] = useState(0)
   const [tokendata, setTokendata] = useState("");
   useEffect(() => {
     const token: string | null = sessionStorage.getItem("authToken");
@@ -25,6 +25,7 @@ export default function Card(props: any) {
                 position: toast.POSITION.TOP_RIGHT,
               });
               window.location.reload()
+              // setCount(count+1)/
         }
     } catch (error) {
         console.log(error);

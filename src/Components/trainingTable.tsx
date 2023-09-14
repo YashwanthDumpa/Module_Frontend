@@ -21,7 +21,6 @@ const CustomCheckbox = styled(TableCell)(({ theme }) => ({
   backgroundColor: "#19105B",
   fontSize: 16,
   fontFamily: "sans-serif"
-
 }));
 
 const theme = createTheme({
@@ -33,15 +32,9 @@ const theme = createTheme({
 });
 
 
-
-
-
-
 export default function TrainingTable(props: any) {
 
   const trainingData = props.trainingData
-
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -78,34 +71,23 @@ export default function TrainingTable(props: any) {
       console.log("setting State");
       setSortingColumn(column);
       setAscending(true);
-
     }
-
   };
 
   if (sortingColumn) {
     console.log("Inside if sorting Column", sortingColumn);
     // console.log(sortedData);
 
-
     trainingData.sort((a: any, b: any) => {
-
       const aValue = a[sortingColumn];
-
       const bValue = b[sortingColumn];
 
       if (ascending) {
-
         return aValue.localeCompare(bValue);
-
       } else {
-
         return bValue.localeCompare(aValue);
-
       }
-
     });
-
   }
 
 

@@ -10,6 +10,7 @@ import RecycleBin from '../Components/recycleBin';
 
 const Routing: React.FC = () => {
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<JinSignIn />} />
@@ -20,6 +21,7 @@ const Routing: React.FC = () => {
         <Route path='/bin' element={<RecycleBin/>} />
       </Routes>
     </BrowserRouter>
+    </>
   )
 }
 

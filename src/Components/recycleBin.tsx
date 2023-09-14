@@ -69,7 +69,7 @@ export default function RecycleBin(props: any) {
                 sessionStorage.clear()
                 Navigate("/")
             }
-            console.log("From Userhome", trainingData.data.trainingData)
+            console.log("From Userhome", trainingData.data.userName)
             setTrainingData(trainingData.data.trainingData);
             setuserName(trainingData.data.userName);
 
