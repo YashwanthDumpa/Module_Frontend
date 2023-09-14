@@ -22,7 +22,7 @@ const Training = (props: any) => {
     });
 
     return (
-        <>
+        <div className='container-fluid pe-4'>
             <h1 className="heading text-start mt-3">Learning & Development</h1>
             <div className="d-flex justify-content-between main-training-box w-100 p-4">
                 <div className='search'>
@@ -33,7 +33,7 @@ const Training = (props: any) => {
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
-                        
+
                         <SearchIcon style={{ color: '#6a6c71' }} className='search-icon' />
                     </abbr>
                 </div>
@@ -49,7 +49,7 @@ const Training = (props: any) => {
             <div className='show-monitor'>
                 <CustomizedTables trainingData={filteredTraining} />
             </div>
-        </>
+        </div>
     );
 }
 

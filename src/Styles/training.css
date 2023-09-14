@@ -10,14 +10,15 @@
     height: 30px;
     color: #6a6c71;
     background-color: rgb(250, 255, 255);
+    border: 1px solid #c0c2c9;
+
 }
 
 .search abbr{
     height: fit-content;
     width: 100%;
-    border: 1px solid #c0c2c9;
     border-radius: 2%;
-
+    text-decoration: none;
 }
 
 .search input{
