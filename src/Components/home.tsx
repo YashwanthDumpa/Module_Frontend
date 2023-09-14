@@ -9,10 +9,8 @@ import Nav from "./nav";
 const Home = () => {
 
     const [userName, setuserName] = useState("")
-
     const [tokendata, setTokendata] = useState('')
     const [trainingData, setTrainingData] = useState([])
-
     const Navigate = useNavigate()
 
     useEffect(() => {

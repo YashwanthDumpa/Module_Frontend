@@ -17,12 +17,7 @@ function Row(props: { data: any }) {
         setTokendata(token);
       }
     }, []);
-  
-  
-   
-  
-  
-  
+    
     async function handleDelete(trainingTitle: any) {
   
       try {
