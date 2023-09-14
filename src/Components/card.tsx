@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import '../Styles/card.css'
 
 export default function Card(props: any) {
+ 
   const [tokendata, setTokendata] = useState("");
   useEffect(() => {
     const token: string | null = sessionStorage.getItem("authToken");
@@ -13,35 +14,21 @@ export default function Card(props: any) {
   }, []);
 
 
+
   async function handleDelete(){
 
     try {
         const trainingTitle =await props.tdata.trainingTitle
         const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`,{headers:{Authorization:tokendata}})
-        console.log(send.data.message);
-
         if(send.data.message === "Deleted Successfully"){
-
             toast.success("Deleted Successfully", {
-
                 position: toast.POSITION.TOP_RIGHT,
-
               });
-
-             
-
               window.location.reload()
-
         }
-
     } catch (error) {
-
         console.log(error);
-
-       
-
     }
-
 }
 
   async function handleTraining() {
@@ -64,15 +51,13 @@ export default function Card(props: any) {
         toast.success("success", {
           position: toast.POSITION.TOP_RIGHT,
         });
+        
       } else if (send.data.message === "already exists") {
         toast.warning("Already Registered", {
           position: toast.POSITION.TOP_RIGHT,
         });
-      } else if (send.data.message === "Training Success") {
-        toast.success("Training Success", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      } else if (send.data.message === "Training Not Found") {
+      }
+      else if (send.data.message === "Training Not Found") {
         toast.error("Training Not Found", {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -111,7 +96,7 @@ export default function Card(props: any) {
       </div>
       <div className="foot">
         {window.location.pathname === "/userhome" ? (
-          <button className="btn btn-sm see-more" onClick={handleTraining}>
+          <button className="btn btn-sm see-more"  onClick={handleTraining}>
             Register
           </button>
         ) : (

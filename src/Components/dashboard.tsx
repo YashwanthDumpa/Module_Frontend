@@ -56,7 +56,7 @@ export default function Dashboard() {
         const token: string | null = sessionStorage.getItem("authToken")
         console.log("token>", token);
         async function getTraining() {
-            const trainingData = await axios.get("http://localhost:8080/get-training-data", { headers: { Authorization: token } })
+            const trainingData = await axios.get("http://localhost:8080/dashboard", { headers: { Authorization: token } })
             console.log(trainingData.data.trainingData);
             if (trainingData.data.message === "TokenExpiredError") {
                 Navigate("/")
