@@ -19,7 +19,7 @@ import TablePaginationActions from './tablePagination';
 const CustomCheckbox = styled(TableCell)(({ theme }) => ({
   color: "white",
   backgroundColor: "#19105B",
-  fontSize: 16,
+  fontSize: 14,
   fontFamily: "sans-serif"
 }));
 

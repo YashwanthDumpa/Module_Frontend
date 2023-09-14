@@ -221,7 +221,6 @@ const TrainingForm = () => {
                         <button
                           className="submit-button"
                           onClick={createTraining}
-
                         >
                           Submit
                         </button>
