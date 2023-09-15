@@ -121,7 +121,7 @@ export default function TrainingTable(props: any) {
         </Table>
       </TableContainer>
       <Paper sx={{ minHeight: 40, border: 0 }} className='d-flex justify-content-end'>
-        <TablePagination
+        <TablePagination sx={{}}
           rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
           colSpan={3}
           count={trainingData.length}

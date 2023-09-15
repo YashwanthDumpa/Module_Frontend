@@ -96,7 +96,7 @@ export default function Card(props: any) {
         <p className="card-text card-description">{props.tdata.description}</p>
       </div>
       <div className="foot">
-        {window.location.pathname === "/userhome" ? (
+        {window.location.pathname === "/LearningDevelopment" ? (
           <button className="btn btn-sm see-more"  onClick={handleTraining}>
             Register
           </button>
