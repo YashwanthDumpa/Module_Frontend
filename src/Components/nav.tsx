@@ -17,7 +17,7 @@ import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 import Build from '@mui/icons-material/AutoStories';
 import Arrow from '@mui/icons-material/ArrowBackIos';
 import Dashboard from './dashboard';
-
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 export default function Nav(props: any) {
@@ -45,7 +45,7 @@ export default function Nav(props: any) {
         { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/LearningDevelopment" },
     ];
 
-    if(window.location.pathname==="/adminLearningDevelopment" || window.location.pathname==="/bin"){
+    if(window.location.pathname==="/adminLearningDevelopment" || window.location.pathname==="/bin" || window.location.pathname==="/manageAccounts"){
          menuItems = [
             { title: "Dashboard", icon: <DashboardIcon className='icon'/> },
             { title: "Timesheet", icon: <AccessTimeIcon className='icon'/> },
@@ -57,7 +57,8 @@ export default function Nav(props: any) {
             { title: "Travel", icon: <FlightIcon className='icon'/> },
             { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
             { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/adminLearningDevelopment" },
-            { title: "Recycle Bin", icon: <AutoDeleteIcon className='icon'/>,navigate:"/bin" },
+            { title: "Recycle Bin", icon: <AutoDeleteIcon className='icon'/>,navigate:"/bin" },  
+            { title: "Manage Account", icon: <ManageAccountsIcon className='icon'/>,navigate:"/manageAccounts" },
         ];
     }
     

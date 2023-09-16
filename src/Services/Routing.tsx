@@ -6,6 +6,7 @@ import Register from '../Layout/jin_register';
 import Userhome from '../Layout/Userhome';
 import Dashboard from '../Components/dashboard';
 import RecycleBin from '../Components/recycleBin';
+import ManageAccounts from '../Components/manageAccounts';
 
 
 const Routing: React.FC = () => {
@@ -19,6 +20,7 @@ const Routing: React.FC = () => {
         <Route path='/adminLearningDevelopment' element={<Home />} />
         <Route path='/LearningDevelopment' element={<Userhome />} />
         <Route path='/bin' element={<RecycleBin/>} />
+        <Route path='/manageAccounts' element={<ManageAccounts/>} />
       </Routes>
     </BrowserRouter>
     </>

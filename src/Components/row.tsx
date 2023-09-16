@@ -2,6 +2,10 @@ import { TableRow, TableCell, IconButton, Collapse, Table, TableBody } from "@mu
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+
+
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -18,47 +22,22 @@ function Row(props: { data: any }) {
     }
   }, []);
 
-
- 
-
-  
-
   async function handleDelete(trainingTitle: any) {
-
     try {
-
-
       const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`, { headers: { Authorization: tokendata } })
-
       console.log(send.data.message);
-
       if (send.data.message === "Deleted Successfully") {
-
         toast.success("Deleted Successfully", {
-
           position: toast.POSITION.TOP_RIGHT,
-
         });
-
-
-
         window.location.reload()
-
       }
-
     } catch (error) {
-
       console.log(error);
-
-
-
     }
-
   }
 
   async function handleTraining(trainingTitled: any) {
-
-
     try {
       const trainingTitle: any = await trainingTitled;
       const send = await axios.get(
@@ -102,8 +81,6 @@ function Row(props: { data: any }) {
 
   const [currentColor, setCurrentColor] = useState('white')
   const [textColor, setTextColor] = useState("#6a6c71");
-
-
   const CustomTableCell = styled(TableCell)(({ theme }) => ({
     color: textColor,
     fontSize: 12.5,
@@ -138,11 +115,14 @@ function Row(props: { data: any }) {
           <CustomTableCell align="center">{data.skillCategory}</CustomTableCell>
           <CustomTableCell align="center">{data.startDateTime}</CustomTableCell>
           <CustomTableCell align="center">{data.endDateTime}</CustomTableCell>
-          <TableCell>
-            {window.location.pathname === '/adminLearningDevelopment' ? <button className="btn btn-sm see-more text-light" onClick={() => handleDelete(data.trainingTitle)}>Delete</button> : <button className="btn btn-sm see-more text-light" onClick={() => handleTraining(data.trainingTitle)}>
-              Register
-            </button>}
-          </TableCell>
+          <CustomTableCell align="center">
+            {window.location.pathname === '/adminLearningDevelopment' ? 
+            <Button variant="outlined" endIcon={<DeleteIcon />} size="small" onClick={() => handleDelete(data.trainingTitle)}>
+        Delete
+      </Button> :<Button variant="outlined" size="small" onClick={() => handleTraining(data.trainingTitle)}>
+        Register
+      </Button>}
+          </CustomTableCell>
 
           <CustomTableCell>
             <IconButton

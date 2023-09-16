@@ -5,9 +5,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
-import Button from '@mui/material/Button';
-import RestoreSharpIcon from '@mui/icons-material/RestoreSharp';
 import Paper from "@mui/material/Paper";
 import {
   createTheme,
@@ -23,7 +20,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Nav from "./nav";
 import TablePaginationActions from "./tablePagination";
-
+import Checkbox from '@mui/material/Checkbox';
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
@@ -35,12 +32,6 @@ const CustomCheckbox = styled(TableCell)(({ theme }) => ({
   fontFamily: "sans-serif",
 }));
 
-const CustomTableCell = styled(TableCell)(({ theme }) => ({
-  color: "#6a6c71",
-  fontSize: 12.5,
-  fontFamily: "Arial",
-}));
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -49,11 +40,35 @@ const theme = createTheme({
   },
 });
 
-export default function RecycleBin(props: any) {
+const ManageAccounts = () => {
   const [userName, setuserName] = useState("");
 
   const [tokendata, setTokendata] = useState("");
-  const [trainingData, setTrainingData] = useState([]);
+
+  
+  const [trainingData, setTrainingData] = useState([
+    { firstName: "Yashwanth", lastName: "Dumpa", mail: "abc@", admin: false },
+    { firstName: "Yashu", lastName: "D", mail: "def@", admin: false },
+]);
+
+
+const [isAdmin, setIsAdmin] = useState(new Array(trainingData.length).fill(false));
+
+  const handleAdminAccess = (position:any)=>{
+    const adminStatus = isAdmin.map((item, index)=>{
+        // index===position?!item:item;
+        if(index===position){
+            trainingData[index].admin = !item;
+            return !item;
+        }else{
+            trainingData[index].admin = item;
+            return item;
+        }
+    }
+    )
+    setIsAdmin(adminStatus)
+    
+  }
 
   const Navigate = useNavigate();
 
@@ -81,7 +96,7 @@ export default function RecycleBin(props: any) {
         Navigate("/");
       }
       console.log("From Userhome", trainingData.data.userName);
-      setTrainingData(trainingData.data.trainingData);
+      //   setTrainingData(trainingData.data.trainingData);
       setuserName(trainingData.data.userName);
     }
 
@@ -172,11 +187,11 @@ export default function RecycleBin(props: any) {
   }
 
   const filteredData = trainingData.filter((training: any) => {
-    return training.trainingTitle
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    return training.firstName.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
   console.log(filteredData);
+
   return (
     <>
       <div className="navigation">
@@ -184,7 +199,7 @@ export default function RecycleBin(props: any) {
       </div>
       <div className="training">
         <div>
-          <h1 className="heading text-start mt-3">Recycle Bin</h1>
+          <h1 className="heading text-start mt-3">Manage Accounts</h1>
           <div className="d-flex justify-content-between main-training-box w-100 pb-4 pt-2">
             <abbr
               title="Search for a training title"
@@ -224,45 +239,31 @@ export default function RecycleBin(props: any) {
                 <TableRow>
                   <ThemeProvider theme={theme}>
                     <CustomCheckbox align="center">
-                      Training Title{" "}
+                      First Name{" "}
                       <SwapVertIcon
                         style={{ fontSize: "20px" }}
                         onClick={() => handleSort("trainingTitle")}
                       />
                     </CustomCheckbox>
-
                     <CustomCheckbox
                       align="center"
                       onClick={() => handleSort("skillTitle")}
                     >
-                      Skill Title <SwapVertIcon style={{ fontSize: "20px" }} />
+                      Last Name <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
-
                     <CustomCheckbox
                       align="center"
                       onClick={() => handleSort("skillCategory")}
                     >
-                      Skill Category{" "}
+                      E-Mail ID <SwapVertIcon style={{ fontSize: "20px" }} />
+                    </CustomCheckbox>
+                    <CustomCheckbox
+                      align="center"
+                      onClick={() => handleSort("skillCategory")}
+                    >
+                      Admin Access
                       <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
-
-                    <CustomCheckbox
-                      align="center"
-                      onClick={() => handleSort("startDateTime")}
-                    >
-                      Start Date <SwapVertIcon style={{ fontSize: "20px" }} />
-                    </CustomCheckbox>
-
-                    <CustomCheckbox
-                      align="center"
-                      onClick={() => handleSort("endDateTime")}
-                    >
-                      End Date <SwapVertIcon style={{ fontSize: "20px" }} />
-                    </CustomCheckbox>
-
-                    <CustomCheckbox align="center">Button</CustomCheckbox>
-
-                    <CustomCheckbox></CustomCheckbox>
                   </ThemeProvider>
                 </TableRow>
               </TableHead>
@@ -273,42 +274,24 @@ export default function RecycleBin(props: any) {
                       page * rowsPerPage + rowsPerPage
                     )
                   : filteredData
-                ).map((training: any) => (
+                ).map((training: any, index) => (
                   <TableRow
                     key={training.trainingTitle}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <ThemeProvider theme={theme}>
-                      <CustomTableCell
-                        component="th"
-                        scope="row"
-                        align="center"
-                      >
-                        {training.trainingTitle}
-                      </CustomTableCell>
-                      <CustomTableCell align="center">
-                        {training.trainingTitle}
-                      </CustomTableCell>
-                      <CustomTableCell align="center">
-                        {training.skillTitle}
-                      </CustomTableCell>
-                      <CustomTableCell align="center">
-                        {training.startDateTime}
-                      </CustomTableCell>
-                      <CustomTableCell align="center">
-                        {training.endDateTime}
-                      </CustomTableCell>
-                      <CustomTableCell align="center">
-                        <Button
-                          variant="outlined"
-                          endIcon={<RestoreSharpIcon />}
-                          size="small"
-                          onClick={() => handleRestore(training.trainingTitle)}
-                        >
-                          Restore
-                        </Button>
-                      </CustomTableCell>
-                    </ThemeProvider>
+                    <TableCell component="th" scope="row" align="center">
+                      {training.firstName}
+                    </TableCell>
+                    <TableCell align="center">{training.lastName}</TableCell>
+                    <TableCell align="center">{training.mail}</TableCell>
+                    <TableCell align="center">
+                      <Checkbox
+                        checked={isAdmin[index]}
+                        name = {training.mail}
+                        onChange={()=>handleAdminAccess(index)}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -338,4 +321,6 @@ export default function RecycleBin(props: any) {
       </div>
     </>
   );
-}
+};
+
+export default ManageAccounts;
