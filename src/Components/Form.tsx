@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import 'reactjs-popup/dist/index.css'
+import { format } from "path";
 
 const TrainingForm = () => {
   const [trainingTitle, setTrainingTitle] = useState("");
@@ -13,6 +14,11 @@ const TrainingForm = () => {
   const [desc, setDesc] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const date = new Date();
+  const formattedDate = `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`;
+
+
 
   const [limit, setLimit] = useState("");
 
@@ -47,7 +53,8 @@ const TrainingForm = () => {
       skillCategory.trim() !== "" &&
       endDate !== "" &&
       startDate !== "" &&
-      startDate <= endDate
+      startDate <= endDate &&
+      new Date(startDate)>= new Date(formattedDate)
     ) {
       const url = `http://localhost:8080/admin`;
       axios
@@ -105,7 +112,7 @@ const TrainingForm = () => {
                 <div className="modal-content">
                   <div className="pe-3 ps-3">
                     <div className="modal-header">
-                      <h1 className="modal-title heading">New Request</h1>
+                      <h1 className="modal-title heading">New Training</h1>
 
                       <div>{close("modal")}</div>
 
