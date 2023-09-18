@@ -6,6 +6,7 @@ import DeleteConfirmation from "./deleteConfirmation";
 
 export default function Card(props: any) {
  const [count, setCount] = useState(0)
+ 
   const [tokendata, setTokendata] = useState("");
   useEffect(() => {
     const token: string | null = sessionStorage.getItem("authToken");
@@ -98,7 +99,7 @@ export default function Card(props: any) {
       </div>
       <div className="foot">
         {window.location.pathname === "/LearningDevelopment" ? (
-          <button className="btn btn-sm see-more"  onClick={handleTraining}>
+          <button className="btn btn-sm see-more" disabled={props.tdata.is_disabled}  onClick={handleTraining}>
             Register
           </button>
         ) : (

@@ -123,6 +123,7 @@ function Row(props: { data: any }) {
               <Button
                 variant="outlined"
                 size="small"
+                disabled={data.is_disabled}
                 onClick={() => handleTraining(data.trainingTitle)}
               >
                 {button}
