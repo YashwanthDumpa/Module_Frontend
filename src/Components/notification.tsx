@@ -16,11 +16,35 @@ import { Paper, Popover } from "@mui/material";
 import Button from "@mui/material/Button";
 
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import axios from "axios";
 
 export default function Notification() {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
+const [notification, setNotification] = React.useState([])
+console.log("notifiacation",notification);
+ React.useEffect(()=>{
+  async function getNotification(){
+    try {
+      const token = await sessionStorage.getItem("authToken")
+      const response = await axios.get("http://localhost:8080/notification",{headers:{Authorization:token}})
+      if(response.data.success){
+        setNotification(response.data.notification)
+        console.log(response.data.notification);
+        
+      }
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  } 
+  getNotification()
+ },[anchorEl])
+
+  
+
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -55,16 +79,14 @@ export default function Notification() {
         }}
       >
           <List sx={{ pt: 0, maxHeight:500 }}>
-            {emails.map((email) => (
-              <ListItem disableGutters key={email}>
-                <ListItemButton onClick={() => handleListItemClick(email)}>
-                  <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                      <PersonIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={email} />
-                </ListItemButton>
+         
+            {notification.map((data) => (
+              
+              <ListItem disableGutters key={data['trainingTitle']}>
+                <div className='d-flex flex-column ps-4'>
+                  <h3>{data['trainingTitle']}</h3>
+                  <p>{data['description']}</p>
+                </div>
               </ListItem>
             ))}
             <ListItem disableGutters>

@@ -46,40 +46,42 @@ const ManageAccounts = () => {
   const [tokendata, setTokendata] = useState("");
 
   
-  const [trainingData, setTrainingData] = useState([
-    { firstName: "Yashwanth", lastName: "Dumpa", mail: "abc@", admin: false },
-    { firstName: "Yashu", lastName: "D", mail: "def@", admin: false },
-]);
+//   const [trainingData, setTrainingData] = useState([
+//     { firstName: "Yashwanth", lastName: "Dumpa", mail: "abc@", admin: false },
+//     { firstName: "Yashu", lastName: "D", mail: "def@", admin: false },
+// ]);
+  const [trainingData, setTrainingData] = useState([]);
 
 
-const [isAdmin, setIsAdmin] = useState(new Array(trainingData.length).fill(false));
+// const [isAdminStatus, setIsAdminStatus] = useState();
 
-  const handleAdminAccess = (position:any)=>{
-    const adminStatus = isAdmin.map((item, index)=>{
-        // index===position?!item:item;
-        if(index===position){
-            trainingData[index].admin = !item;
-            return !item;
-        }else{
-            trainingData[index].admin = item;
-            return item;
-        }
+
+const Navigate = useNavigate();
+
+const [searchTerm, setSearchTerm] = useState("");
+
+
+const token: string | null = sessionStorage.getItem("authToken");
+const handleAdminAccess = async(mailId:any)=>{
+  try{
+    console.log("Clicked Admin Access");
+    
+
+    const setIsAdmin  =  await axios.post("http://localhost:8080/adminStatus",{mailId,token})
+    if(setIsAdmin.data.success){
+      window.location.reload()
     }
-    )
-    setIsAdmin(adminStatus)
+  }catch(error){
+    console.log(error);
     
   }
-
-  const Navigate = useNavigate();
-
-  const [searchTerm, setSearchTerm] = useState("");
+}
 
   useEffect(() => {
-    const token: string | null = sessionStorage.getItem("authToken");
     console.log("token>", token);
     async function getTraining() {
       const trainingData = await axios.get(
-        "http://localhost:8080/recycle-bin",
+        "http://localhost:8080/userinfo",
         { headers: { Authorization: token } }
       );
       console.log(trainingData.data.trainingData);
@@ -96,7 +98,7 @@ const [isAdmin, setIsAdmin] = useState(new Array(trainingData.length).fill(false
         Navigate("/");
       }
       console.log("From Userhome", trainingData.data.userName);
-      //   setTrainingData(trainingData.data.trainingData);
+        setTrainingData(trainingData.data.userData);
       setuserName(trainingData.data.userName);
     }
 
@@ -109,29 +111,7 @@ const [isAdmin, setIsAdmin] = useState(new Array(trainingData.length).fill(false
     }
   }, []);
 
-  async function handleRestore(title: any) {
-    console.log(title);
 
-    const token: string | null = sessionStorage.getItem("authToken");
-    console.log("restore: ", token);
-
-    try {
-      if (token) {
-        const restoreResponse = await axios.get(
-          `http://localhost:8080/restore/${title}`,
-          { headers: { Authorization: token } }
-        );
-        if (restoreResponse.data.message === "Restored Successfully") {
-          toast.success("Restored Successfully", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          window.location.reload();
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -187,7 +167,7 @@ const [isAdmin, setIsAdmin] = useState(new Array(trainingData.length).fill(false
   }
 
   const filteredData = trainingData.filter((training: any) => {
-    return training.firstName.toLowerCase().includes(searchTerm.toLowerCase());
+    return training.FirstName.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   console.log(filteredData);
@@ -280,15 +260,15 @@ const [isAdmin, setIsAdmin] = useState(new Array(trainingData.length).fill(false
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row" align="center">
-                      {training.firstName}
+                      {training.FirstName}
                     </TableCell>
-                    <TableCell align="center">{training.lastName}</TableCell>
-                    <TableCell align="center">{training.mail}</TableCell>
+                    <TableCell align="center">{training.LastName}</TableCell>
+                    <TableCell align="center">{training.Employee_Email}</TableCell>
                     <TableCell align="center">
                       <Checkbox
-                        checked={isAdmin[index]}
+                        checked={training.is_admin}
                         name = {training.mail}
-                        onChange={()=>handleAdminAccess(index)}
+                        onChange={()=>handleAdminAccess(training.Employee_Email)}
                         inputProps={{ "aria-label": "controlled" }}
                       />
                     </TableCell>
