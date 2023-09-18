@@ -32,7 +32,7 @@ const theme = createTheme({
 });
 
 
-export default function TrainingTable(props: any) {
+export default function RegisteredTraining(props: any) {
 
   const trainingData = props.trainingData
   const [page, setPage] = React.useState(0);
@@ -105,7 +105,7 @@ export default function TrainingTable(props: any) {
                 <CustomCheckbox align="center" onClick={() => handleSort('skillCategory')}>Skill Category <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
                 <CustomCheckbox align="center" onClick={() => handleSort('startDateTime')}>Start Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
                 <CustomCheckbox align="center" onClick={() => handleSort('endDateTime')}>End Date <SwapVertIcon style={{ fontSize: '20px' }} /></CustomCheckbox>
-                <CustomCheckbox align="center"></CustomCheckbox>
+                <CustomCheckbox align="center">Button</CustomCheckbox>
                 <CustomCheckbox></CustomCheckbox>
               </ThemeProvider>
             </TableRow>
@@ -115,7 +115,7 @@ export default function TrainingTable(props: any) {
               ? trainingData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : trainingData
             ).map((data: any) => (
-              <Row key={data.trainingTitle} data={{data,button:props.buttonText}}  />
+              <Row key={data.trainingTitle} data={data} />
             ))}
           </TableBody>
         </Table>

@@ -4,6 +4,7 @@ import axios from 'axios'
 import Training from '../Components/Training'
 import Nav from '../Components/nav'
 import '../Styles/home.css'
+import BasicTabs from '../Components/tabs'
 
 const Userhome: React.FC = () => {
 
@@ -46,7 +47,8 @@ const Userhome: React.FC = () => {
                 <Nav name={userName} />
             </div>
             <div className="training">
-                <Training trainingData={trainingData} />
+                {/* <Training trainingData={trainingData} /> */}
+                <BasicTabs trainingData={trainingData}/>
             </div>
 
         </>

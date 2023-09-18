@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 import Training from "./Training";
 import Nav from "./nav";
+import BasicTabs from './tabs';
 
 const Home = () => {
 
@@ -44,7 +45,8 @@ const Home = () => {
                 <Nav Nav name={userName} />
             </div>
             <div className="training">
-                <Training trainingData={trainingData}/>
+               <Training trainingData={trainingData}/>  
+                
             </div>
         </div>
 

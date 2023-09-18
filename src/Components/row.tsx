@@ -20,7 +20,7 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import DeleteConfirmation from "./deleteConfirmation";
 
 function Row(props: { data: any }) {
-  const { data } = props;
+  const { data, button } = props.data;
   const [open, setOpen] = React.useState(false);
   const [tokendata, setTokendata] = useState("");
   useEffect(() => {
@@ -125,7 +125,7 @@ function Row(props: { data: any }) {
                 size="small"
                 onClick={() => handleTraining(data.trainingTitle)}
               >
-                Register
+                {button}
               </Button>
             )}
           </CustomTableCell>
