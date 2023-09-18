@@ -166,9 +166,3 @@ function Row(props: { data: any }) {
 }
 
 export default Row;
-
-
-
-
-
-{/*  */}

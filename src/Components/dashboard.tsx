@@ -228,7 +228,10 @@ export default function Dashboard() {
                     </CustomCheckbox>
 
                     <CustomCheckbox align="center">
-                      Registered Date and Time
+                      Registered Date
+                    </CustomCheckbox>
+                    <CustomCheckbox align="center">
+                      Registered Time
                     </CustomCheckbox>
 
                     <CustomCheckbox></CustomCheckbox>
@@ -268,7 +271,10 @@ export default function Dashboard() {
                         {training.endDateTime}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.RegisteredDateTime}
+                        {training.RegisteredDateTime.split("T")[0]}
+                      </CustomTableCell>
+                      <CustomTableCell align="center">
+                        {training.RegisteredDateTime.split("T")[1].split(".")[0]}
                       </CustomTableCell>
                     </ThemeProvider>
                   </TableRow>
