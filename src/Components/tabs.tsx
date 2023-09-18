@@ -75,10 +75,10 @@ export default function BasicTabs(props: any) {
             <Training trainingData={props.trainingData} buttonText={"Register"}/>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            <Training trainingData={props.trainingData} buttonText={"Live"} />
+            <Training trainingData={props.onGoingTrainingData} buttonText={"OnGoing"} />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            <Training trainingData={props.trainingData} buttonText={"UnRegister"} />
+            <Training trainingData={props.registeredTrainingData} buttonText={"Registered"} />
           </CustomTabPanel>
         </Box>
       </div>
