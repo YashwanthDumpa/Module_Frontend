@@ -1,16 +1,24 @@
-import { TableRow, TableCell, IconButton, Collapse, Table, TableBody } from "@mui/material";
+import {
+  TableRow,
+  TableCell,
+  IconButton,
+  Collapse,
+  Table,
+  TableBody,
+} from "@mui/material";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import DeleteConfirmation from "./deleteConfirmation";
 
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 function Row(props: { data: any }) {
   const { data } = props;
   const [open, setOpen] = React.useState(false);
@@ -22,20 +30,7 @@ function Row(props: { data: any }) {
     }
   }, []);
 
-  async function handleDelete(trainingTitle: any) {
-    try {
-      const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`, { headers: { Authorization: tokendata } })
-      console.log(send.data.message);
-      if (send.data.message === "Deleted Successfully") {
-        toast.success("Deleted Successfully", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-        window.location.reload()
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 
   async function handleTraining(trainingTitled: any) {
     try {
@@ -79,34 +74,40 @@ function Row(props: { data: any }) {
     }
   }
 
-  const [currentColor, setCurrentColor] = useState('white')
+  const [currentColor, setCurrentColor] = useState("white");
   const [textColor, setTextColor] = useState("#6a6c71");
   const CustomTableCell = styled(TableCell)(({ theme }) => ({
     color: textColor,
     fontSize: 12.5,
-    fontFamily: "Arial"
+    fontFamily: "Arial",
   }));
 
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#19105B',
+        main: "#19105B",
       },
     },
   });
   function handleColor(key: any) {
-    setOpen(!open)
+    setOpen(!open);
     setCurrentColor((prevColor) =>
-      prevColor === 'white' ? '#FBBFD3' : 'white'
+      prevColor === "white" ? "#FBBFD3" : "white"
     );
-    setTextColor((prevColo:string)=>
-      prevColo === '#6a6c71'?"#19105B":"#6a6c71"
-    )
+    setTextColor((prevColo: string) =>
+      prevColo === "#6a6c71" ? "#19105B" : "#6a6c71"
+    );
   }
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' }, backgroundColor: currentColor }} key={data.trainingTitle}>
+      <TableRow
+        sx={{
+          "& > *": { borderBottom: "unset" },
+          backgroundColor: currentColor,
+        }}
+        key={data.trainingTitle}
+      >
         <ThemeProvider theme={theme}>
           <CustomTableCell align="center" component="th" scope="row">
             {data.trainingTitle}
@@ -116,14 +117,18 @@ function Row(props: { data: any }) {
           <CustomTableCell align="center">{data.startDateTime}</CustomTableCell>
           <CustomTableCell align="center">{data.endDateTime}</CustomTableCell>
           <CustomTableCell align="center">
-            {window.location.pathname === '/adminLearningDevelopment' ? 
-            <Button variant="outlined" endIcon={<DeleteIcon />} size="small" onClick={() => handleDelete(data.trainingTitle)}>
-        Delete
-      </Button> :<Button variant="outlined" size="small" onClick={() => handleTraining(data.trainingTitle)}>
-        Register
-      </Button>}
+            {window.location.pathname === "/adminLearningDevelopment" ? (
+              <DeleteConfirmation trainingTitle={data.trainingTitle}/>
+            ) : (
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={() => handleTraining(data.trainingTitle)}
+              >
+                Register
+              </Button>
+            )}
           </CustomTableCell>
-
           <CustomTableCell>
             <IconButton
               aria-label="expand row"
@@ -139,10 +144,17 @@ function Row(props: { data: any }) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Table size="small" aria-label="purchases">
-
               <TableBody>
                 <TableRow>
-                  <CustomTableCell sx={{ maxWidth: 180, overflowWrap: 'break-word', color:"#6a6c71"}}>{data.description}</CustomTableCell>
+                  <CustomTableCell
+                    sx={{
+                      maxWidth: 180,
+                      overflowWrap: "break-word",
+                      color: "#6a6c71",
+                    }}
+                  >
+                    {data.description}
+                  </CustomTableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -154,3 +166,9 @@ function Row(props: { data: any }) {
 }
 
 export default Row;
+
+
+
+
+
+{/*  */}
