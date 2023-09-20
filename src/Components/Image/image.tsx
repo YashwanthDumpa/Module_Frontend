@@ -1,4 +1,4 @@
-import '../Styles/image.css'
+import '../../Styles/image.css'
 
 const Image = ()=>{
     return(

@@ -3,12 +3,11 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Training from "../Components/Training";
-import TrainingTable from "./trainingTable";
+import Training from "../../Training";
+import TrainingTable from "../../trainingTable";
 import AppBar from "@mui/material/AppBar";
 import { useTheme } from "@mui/material/styles";
-import OngoingTraining from "./ongoing";
-import RegisteredTraining from "./registered";
+
 
 interface TabPanelProps {
   children?: React.ReactNode;

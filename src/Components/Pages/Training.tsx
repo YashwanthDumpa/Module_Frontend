@@ -1,9 +1,9 @@
 
 import { useState } from 'react';
 import Card from './card';
-import TrainingForm from './Form';
+import TrainingForm from './Admin/Form';
 import TrainingTable from './trainingTable';
-import '../Styles/training.css';
+import '../../Styles/training.css';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';

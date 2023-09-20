@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import JinSignIn from '../Layout/jin_sign_in';
-import Home from '../Components/home';
-import Register from '../Layout/jin_register';
-import Userhome from '../Layout/Userhome';
-import Dashboard from '../Components/dashboard';
-import RecycleBin from '../Components/recycleBin';
-import ManageAccounts from '../Components/manageAccounts';
+import JinSignIn from '../Components/SignIn/jin_sign_in';
+import Home from '../Layout/Admin/home';
+import Register from '../Components/Registration/jin_register';
+import Userhome from '../Layout/User/Userhome';
+import Dashboard from '../Layout/Dashboard/dashboard';
+import RecycleBin from '../Components/Pages/Admin/recycleBin';
+import ManageAccounts from '../Components/Pages/Admin/manageAccounts';
 
 
 

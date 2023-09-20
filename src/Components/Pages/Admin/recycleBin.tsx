@@ -5,6 +5,9 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+
+import Button from '@mui/material/Button';
+import RestoreSharpIcon from '@mui/icons-material/RestoreSharp';
 import Paper from "@mui/material/Paper";
 import {
   createTheme,
@@ -18,9 +21,9 @@ import axios from "axios";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import Nav from "./nav";
-import TablePaginationActions from "./tablePagination";
-import Notification from "./notification";
+import Nav from "../../../Layout/Sidebar/nav";
+import TablePaginationActions from "../tablePagination";
+
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
@@ -46,7 +49,7 @@ const theme = createTheme({
   },
 });
 
-export default function Dashboard() {
+export default function RecycleBin(props: any) {
   const [userName, setuserName] = useState("");
 
   const [tokendata, setTokendata] = useState("");
@@ -60,14 +63,24 @@ export default function Dashboard() {
     const token: string | null = sessionStorage.getItem("authToken");
     console.log("token>", token);
     async function getTraining() {
-      const trainingData = await axios.get("http://localhost:8080/dashboard", {
-        headers: { Authorization: token },
-      });
+      const trainingData = await axios.get(
+        "http://localhost:8080/recycle-bin",
+        { headers: { Authorization: token } }
+      );
       console.log(trainingData.data.trainingData);
       if (trainingData.data.message === "TokenExpiredError") {
+        sessionStorage.clear();
         Navigate("/");
       }
-      console.log("From Userhome", trainingData.data.trainingData);
+      if (trainingData.data.message === "Token Not Found") {
+        sessionStorage.clear();
+        Navigate("/");
+      }
+      if (trainingData.data.message === "Verification Failed") {
+        sessionStorage.clear();
+        Navigate("/");
+      }
+      console.log("From Userhome", trainingData.data.userName);
       setTrainingData(trainingData.data.trainingData);
       setuserName(trainingData.data.userName);
     }
@@ -81,6 +94,30 @@ export default function Dashboard() {
     }
   }, []);
 
+  async function handleRestore(title: any) {
+    console.log(title);
+
+    const token: string | null = sessionStorage.getItem("authToken");
+    console.log("restore: ", token);
+
+    try {
+      if (token) {
+        const restoreResponse = await axios.get(
+          `http://localhost:8080/restore/${title}`,
+          { headers: { Authorization: token } }
+        );
+        if (restoreResponse.data.message === "Restored Successfully") {
+          toast.success("Restored Successfully", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          window.location.reload();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -89,7 +126,7 @@ export default function Dashboard() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - trainingData.length) : 0;
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
@@ -140,18 +177,14 @@ export default function Dashboard() {
       .includes(searchTerm.toLowerCase());
   });
   console.log(filteredData);
-
   return (
     <>
       <div className="navigation">
         <Nav name={userName} />
       </div>
-      <div className="training ">
+      <div className="training">
         <div>
-          <div className="d-flex justify-content-between mt-3">
-            <h1 className="heading text-start ">Dashboard</h1>
-            <Notification />
-          </div>
+          <h1 className="heading text-start mt-3">Recycle Bin</h1>
           <div className="d-flex justify-content-between main-training-box w-100 pb-4 pt-2">
             <abbr
               title="Search for a training title"
@@ -227,12 +260,7 @@ export default function Dashboard() {
                       End Date <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
 
-                    <CustomCheckbox align="center">
-                      Registered Date
-                    </CustomCheckbox>
-                    <CustomCheckbox align="center">
-                      Registered Time
-                    </CustomCheckbox>
+                    <CustomCheckbox align="center">Button</CustomCheckbox>
 
                     <CustomCheckbox></CustomCheckbox>
                   </ThemeProvider>
@@ -271,10 +299,14 @@ export default function Dashboard() {
                         {training.endDateTime}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.RegisteredDateTime.split("T")[0]}
-                      </CustomTableCell>
-                      <CustomTableCell align="center">
-                        {training.RegisteredDateTime.split("T")[1].split(".")[0]}
+                        <Button
+                          variant="outlined"
+                          endIcon={<RestoreSharpIcon />}
+                          size="small"
+                          onClick={() => handleRestore(training.trainingTitle)}
+                        >
+                          Restore
+                        </Button>
                       </CustomTableCell>
                     </ThemeProvider>
                   </TableRow>

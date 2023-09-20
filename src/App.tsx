@@ -2,7 +2,7 @@
 // import logo from './logo.svg';
 // import './App.css';
 import Routing from './Services/Routing';
-import Nav from './Components/nav';
+import Nav from './Layout/Sidebar/nav';
 
 function App() {
   return (

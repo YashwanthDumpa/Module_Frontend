@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import '../Styles/card.css'
-import DeleteConfirmation from "./deleteConfirmation";
+import '../../Styles/card.css'
+import DeleteConfirmation from "./Admin/deleteConfirmation";
 
 export default function Card(props: any) {
  const [count, setCount] = useState(0)

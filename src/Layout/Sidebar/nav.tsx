@@ -1,7 +1,7 @@
-import '../Styles/nav.css';
+import '../../Styles/nav.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
-import logo from "../assets/download.png"
+import logo from "../../assets/download.png"
 
 import Menu from '@mui/icons-material/Menu';
 import DashboardIcon from "@mui/icons-material/Dashboard";

@@ -10,9 +10,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from "@mui/material/InputAdornment";
 
-import Image from "../Components/image";
-import "../Styles/jinSignIn.css";
-import LoginBtn from "../Components/LoginBtn";
+import Image from "../Image/image";
+import "../../Styles/jinSignIn.css";
+import LoginBtn from "./SSO/LoginBtn";
 
 const JinSignIn = () => {
   const [mailId, setMailId] = useState("");

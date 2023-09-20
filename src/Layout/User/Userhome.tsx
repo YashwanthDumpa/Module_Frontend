@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
-import Training from '../Components/Training'
-import Nav from '../Components/nav'
-import '../Styles/home.css'
-import BasicTabs from '../Components/tabs'
+import Nav from '../Sidebar/nav'
+import '../../Styles/home.css'
+import BasicTabs from '../../Components/Pages/Users/LearningDevelopment/tabs'
 
 const Userhome: React.FC = () => {
 

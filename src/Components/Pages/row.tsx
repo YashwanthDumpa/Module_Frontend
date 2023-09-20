@@ -17,7 +17,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import DeleteConfirmation from "./deleteConfirmation";
+import DeleteConfirmation from "./Admin/deleteConfirmation";
 
 function Row(props: { data: any }) {
   const { data, button } = props.data;

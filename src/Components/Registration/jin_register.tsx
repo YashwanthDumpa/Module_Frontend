@@ -5,8 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import '../Styles/jinSignIn.css';
-import Image from '../Components/image';
+import '../../Styles/jinSignIn.css';
+import Image from '../Image/image';
 
 
 const Register = () => {
