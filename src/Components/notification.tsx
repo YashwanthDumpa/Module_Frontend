@@ -1,17 +1,6 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Popper from "@mui/material/Popper";
-import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import PersonIcon from "@mui/icons-material/Person";
-import AddIcon from "@mui/icons-material/Add";
-import { blue } from "@mui/material/colors";
 import { Paper, Popover } from "@mui/material";
 import Button from "@mui/material/Button";
 
@@ -78,18 +67,17 @@ console.log("notifiacation",notification);
           horizontal: "left",
         }}
       >
-          <List sx={{ pt: 0, maxHeight:500 }}>
+          <List sx={{ pt: 0, maxHeight:500, maxWidth:220}}>
          
             {notification.map((data) => (
-              
               <ListItem disableGutters key={data['trainingTitle']}>
                 <div className='d-flex flex-column ps-4'>
-                  <h3>{data['trainingTitle']}</h3>
-                  <p>{data['description']}</p>
+                  <h4>{data['trainingTitle']}</h4>
+                  <p>A new training {data['trainingTitle']} is created on {data['createdAt']}. Register before the seats are filled!</p>
                 </div>
               </ListItem>
             ))}
-            <ListItem disableGutters>
+            {/* <ListItem disableGutters>
               <ListItemButton
                 autoFocus
                 onClick={() => handleListItemClick("addAccount")}
@@ -101,7 +89,7 @@ console.log("notifiacation",notification);
                 </ListItemAvatar>
                 <ListItemText primary="Add account" />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
           </List>
    
       </Popover>

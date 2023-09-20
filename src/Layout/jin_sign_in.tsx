@@ -12,6 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 import Image from "../Components/image";
 import "../Styles/jinSignIn.css";
+import LoginBtn from "../Components/LoginBtn";
 
 const JinSignIn = () => {
   const [mailId, setMailId] = useState("");
@@ -209,7 +210,7 @@ const JinSignIn = () => {
                 }
               }}
             />
-            <div className="d-flex flex-row justify-content-end">
+            <div className="d-flex flex-row justify-content-between">
               {/* <Button variant="contained" className='mb-3 button' onClick={signin}>Sign In</Button> */}
               <button type="button" className="button1" onClick={handleSubmit}>
                 SIGN IN
@@ -227,6 +228,7 @@ const JinSignIn = () => {
                   />
                 </svg>
               </button>
+              <LoginBtn />
             </div>
             <p className="text-end mt-2">
               Don't have an account? <Link to="/register">Register</Link>

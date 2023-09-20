@@ -1,11 +1,10 @@
-// import LandD from "./LandDScreen";
+
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/home.css';
 import Training from "./Training";
 import Nav from "./nav";
-import BasicTabs from './tabs';
 
 const Home = () => {
 
@@ -42,11 +41,12 @@ const Home = () => {
 
         <div>
             <div className="navigation">
-                <Nav Nav name={userName} />
+                <Nav name={userName} />
             </div>
             <div className="training">
-               <Training trainingData={trainingData}/>  
-                
+                <h1 className="heading text-start mt-3">Learning & Development</h1>
+                <Training trainingData={trainingData} />
+
             </div>
         </div>
 

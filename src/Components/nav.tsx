@@ -16,7 +16,6 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 import Build from '@mui/icons-material/AutoStories';
 import Arrow from '@mui/icons-material/ArrowBackIos';
-import Dashboard from './dashboard';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
@@ -42,7 +41,7 @@ export default function Nav(props: any) {
         { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
         { title: "Travel", icon: <FlightIcon className='icon'/> },
         { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
-        { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/LearningDevelopment" },
+        { title: "Learn & Development", icon: <Build className='icon'/>, navigate:"/LearningDevelopment" },
     ];
 
     if(window.location.pathname==="/adminLearningDevelopment" || window.location.pathname==="/bin" || window.location.pathname==="/manageAccounts"){
@@ -93,7 +92,7 @@ export default function Nav(props: any) {
                     <li><a href={item.navigate?item.navigate:"#"}>{item.title}</a></li>
                 )}
                 <div className="signout" onClick={handleLogout}>
-                    <p>Logout</p>
+                    <p >Logout</p>
                 </div>
             </ul>
         </>

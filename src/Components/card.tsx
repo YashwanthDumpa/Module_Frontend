@@ -78,7 +78,6 @@ export default function Card(props: any) {
     <div className="card">
       <div className="card-title c-title">
         <h5 className="card-heading">{props.tdata.trainingTitle}</h5>
-        <p>Capacity: {props.tdata.limit}</p>
 
       </div>
       <div className="card-body body-text">
