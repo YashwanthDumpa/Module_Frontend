@@ -52,7 +52,7 @@ export default function BasicTabs(props: any) {
   return (
     <>
       <div className="container-fluid pe-4">
-        <h1 className="heading text-start mt-3 mb-3">Learning & Development</h1>
+        <h1 className="heading text-start mt-3 mb-3">Training</h1>
 
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

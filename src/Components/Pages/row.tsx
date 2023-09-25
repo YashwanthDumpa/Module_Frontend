@@ -99,6 +99,16 @@ function Row(props: { data: any }) {
     );
   }
 
+
+
+  function changeDateFormat(inputDate: string) {
+    const [year, month, day] = inputDate.split("-");
+    // Create a new date string in dd-mm-yyyy format
+    const formattedDate = `${day}-${month}-${year}`;
+    return formattedDate;
+
+  }
+
   return (
     <React.Fragment>
       <TableRow
@@ -114,8 +124,8 @@ function Row(props: { data: any }) {
           </CustomTableCell>
           <CustomTableCell align="center">{data.skillTitle}</CustomTableCell>
           <CustomTableCell align="center">{data.skillCategory}</CustomTableCell>
-          <CustomTableCell align="center">{data.startDateTime}</CustomTableCell>
-          <CustomTableCell align="center">{data.endDateTime}</CustomTableCell>
+          <CustomTableCell align="center">{changeDateFormat(data.startDateTime)}</CustomTableCell>
+          <CustomTableCell align="center">{changeDateFormat(data.endDateTime)}</CustomTableCell>
           <CustomTableCell align="center">
             {window.location.pathname === "/adminLearningDevelopment" ? (
               <DeleteConfirmation trainingTitle={data.trainingTitle}/>

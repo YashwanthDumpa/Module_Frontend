@@ -106,9 +106,9 @@ export default function Dashboard() {
   const [ascending, setAscending] = useState<boolean>(true);
 
   const handleSort = (column: string) => {
-    console.log("Clickable");
-    console.log(column, "Column Name");
-    console.log(sortingColumn, "SortingColumn");
+    // console.log("Clickable");
+    // console.log(column, "Column Name");
+    // console.log(sortingColumn, "SortingColumn");
 
     if (sortingColumn === column) {
       setAscending(!ascending);
@@ -140,6 +140,17 @@ export default function Dashboard() {
       .includes(searchTerm.toLowerCase());
   });
   console.log(filteredData);
+
+
+  function changeDateFormat(inputDate: string) {
+    const [year, month, day] = inputDate.split("-");
+    // Create a new date string in dd-mm-yyyy format
+    const formattedDate = `${day}-${month}-${year}`;
+    return formattedDate;
+
+  }
+
+
 
   return (
     <>
@@ -220,15 +231,18 @@ export default function Dashboard() {
                       Start Date <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
 
+
                     <CustomCheckbox
                       align="center"
                       onClick={() => handleSort("endDateTime")}
                     >
                       End Date <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
-
-                    <CustomCheckbox align="center">
-                      Registered Date
+                    <CustomCheckbox
+                      align="center"
+                      onClick={() => handleSort("RegisteredDateTime")}
+                    >
+                      Registered Date <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
                     <CustomCheckbox align="center">
                       Registered Time
@@ -241,9 +255,9 @@ export default function Dashboard() {
               <TableBody>
                 {(rowsPerPage > 0
                   ? filteredData.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
                   : filteredData
                 ).map((training: any) => (
                   <TableRow
@@ -265,13 +279,13 @@ export default function Dashboard() {
                         {training.skillTitle}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.startDateTime}
+                        {changeDateFormat(training.startDateTime)}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.endDateTime}
+                        {changeDateFormat(training.endDateTime)}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.RegisteredDateTime.split("T")[0]}
+                        {changeDateFormat(training.RegisteredDateTime.split("T")[0])}
                       </CustomTableCell>
                       <CustomTableCell align="center">
                         {training.RegisteredDateTime.split("T")[1].split(".")[0]}

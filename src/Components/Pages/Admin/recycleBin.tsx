@@ -176,7 +176,20 @@ export default function RecycleBin(props: any) {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
   });
-  console.log(filteredData);
+ 
+
+  function changeDateFormat(inputDate: string) {
+    const [year, month, day] = inputDate.split("-");
+    // Create a new date string in dd-mm-yyyy format
+    const formattedDate = `${day}-${month}-${year}`;
+    return formattedDate;
+
+  }
+
+
+
+
+
   return (
     <>
       <div className="navigation">
@@ -293,10 +306,10 @@ export default function RecycleBin(props: any) {
                         {training.skillTitle}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.startDateTime}
+                        {changeDateFormat(training.startDateTime)}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.endDateTime}
+                        {changeDateFormat(training.endDateTime)}
                       </CustomTableCell>
                       <CustomTableCell align="center">
                         <Button

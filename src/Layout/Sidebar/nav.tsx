@@ -41,7 +41,7 @@ export default function Nav(props: any) {
         { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
         { title: "Travel", icon: <FlightIcon className='icon'/> },
         { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
-        { title: "Learn & Development", icon: <Build className='icon'/>, navigate:"/LearningDevelopment" },
+        { title: "Training", icon: <Build className='icon'/>, navigate:"/LearningDevelopment" },
     ];
 
     if(window.location.pathname==="/adminLearningDevelopment" || window.location.pathname==="/bin" || window.location.pathname==="/manageAccounts"){
@@ -55,7 +55,7 @@ export default function Nav(props: any) {
             { title: "Forms", icon: <AssignmentTurnedInIcon className='icon'/> },
             { title: "Travel", icon: <FlightIcon className='icon'/> },
             { title: "Expenses", icon: <ReceiptIcon className='icon'/> },
-            { title: "Learn & Development", icon: <Build className='icon'/>,navigate:"/adminLearningDevelopment" },
+            { title: "Training", icon: <Build className='icon'/>,navigate:"/adminLearningDevelopment" },
             { title: "Recycle Bin", icon: <AutoDeleteIcon className='icon'/>,navigate:"/bin" },  
             { title: "Manage Account", icon: <ManageAccountsIcon className='icon'/>,navigate:"/manageAccounts" },
         ];

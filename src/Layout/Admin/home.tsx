@@ -44,7 +44,7 @@ const Home = () => {
                 <Nav name={userName} />
             </div>
             <div className="training">
-                <h1 className="heading text-start mt-3">Learning & Development</h1>
+                <h1 className="heading text-start mt-3">Training</h1>
                 <Training trainingData={trainingData} />
 
             </div>
