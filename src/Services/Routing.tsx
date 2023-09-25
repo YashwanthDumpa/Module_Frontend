@@ -22,7 +22,6 @@ const Routing: React.FC = () => {
         <Route path='/LearningDevelopment' element={<Userhome />} />
         <Route path='/bin' element={<RecycleBin/>} />
         <Route path='/manageAccounts' element={<ManageAccounts/>} />
-      
       </Routes>
     </BrowserRouter>
     </>

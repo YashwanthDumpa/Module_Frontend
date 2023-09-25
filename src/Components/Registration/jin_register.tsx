@@ -7,7 +7,9 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import '../../Styles/jinSignIn.css';
 import Image from '../Image/image';
-
+// import {createUser} from '../../actions/User/UserReq'
+import {userReq} from '../../actions/User/UserReq'
+ 
 
 const Register = () => {
     const Navigate = useNavigate()
@@ -103,24 +105,23 @@ const Register = () => {
             console.log("Clicked");
 
             try {
-                const RegisterRequest = await axios.post(
-                    "http://localhost:8080/register",
-                    data
-                );
+                console.log("12");
+                const RegisterRequest = await userReq.createUser(data)
+                console.log("13");
+                
                 console.log(RegisterRequest);
                 console.log(data);
-                if (RegisterRequest.data.message === "User Already Registered") {
+                if (RegisterRequest === "User Already Registered") {
                     toast.error('User Already Registered', {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 }
-                if (RegisterRequest.data.message === "email sent") {
+                if (RegisterRequest === "email sent") {
                     toast.success('Email Sent Successfully, click the Activation link in your email to Activate your account', {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 }
-                if (RegisterRequest.data.message === "User Created") {
-
+                if (RegisterRequest === "User Created") {
                     toast.success('Registration Success', {
                         position: toast.POSITION.TOP_RIGHT
                     });
@@ -128,8 +129,7 @@ const Register = () => {
                         Navigate("/")
                     }, 3000)
                 }
-
-                if (RegisterRequest.data.message === "empty data") {
+                if (RegisterRequest === "empty data") {
                     toast.error('empty data', {
                         position: toast.POSITION.TOP_RIGHT
                     });

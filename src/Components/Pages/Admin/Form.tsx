@@ -18,8 +18,6 @@ const TrainingForm = () => {
   const date = new Date();
   const formattedDate = `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`;
 
-
-
   const [limit, setLimit] = useState("");
 
   const data = {

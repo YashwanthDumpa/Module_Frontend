@@ -5,8 +5,8 @@ import '../../Styles/card.css'
 import DeleteConfirmation from "./Admin/deleteConfirmation";
 
 export default function Card(props: any) {
- const [count, setCount] = useState(0)
- 
+  const [count, setCount] = useState(0)
+
   const [tokendata, setTokendata] = useState("");
   useEffect(() => {
     const token: string | null = sessionStorage.getItem("authToken");
@@ -17,22 +17,22 @@ export default function Card(props: any) {
 
 
 
-  async function handleDelete(){
+  async function handleDelete() {
 
     try {
-        const trainingTitle =await props.tdata.trainingTitle
-        const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`,{headers:{Authorization:tokendata}})
-        if(send.data.message === "Deleted Successfully"){
-            toast.success("Deleted Successfully", {
-                position: toast.POSITION.TOP_RIGHT,
-              });
-              window.location.reload()
-              // setCount(count+1)/
-        }
+      const trainingTitle = await props.tdata.trainingTitle
+      const send = await axios.get(`http://localhost:8080/deleteTraining/${trainingTitle}`, { headers: { Authorization: tokendata } })
+      if (send.data.message === "Deleted Successfully") {
+        toast.success("Deleted Successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        window.location.reload()
+        // setCount(count+1)/
+      }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  }
 
   async function handleTraining() {
     try {
@@ -54,7 +54,7 @@ export default function Card(props: any) {
         toast.success("success", {
           position: toast.POSITION.TOP_RIGHT,
         });
-        
+
       } else if (send.data.message === "already exists") {
         toast.warning("Already Registered", {
           position: toast.POSITION.TOP_RIGHT,
@@ -98,11 +98,11 @@ export default function Card(props: any) {
       </div>
       <div className="foot">
         {window.location.pathname === "/LearningDevelopment" ? (
-          <button className="btn btn-sm see-more" disabled={props.tdata.is_disabled}  onClick={handleTraining}>
+          <button className="btn btn-sm see-more" disabled={props.tdata.is_disabled} onClick={handleTraining}>
             Register
           </button>
         ) : (
-          <DeleteConfirmation trainingTitle={props.tdata.trainingTitle}/>
+          <DeleteConfirmation trainingTitle={props.tdata.trainingTitle} />
         )}
       </div>
 
