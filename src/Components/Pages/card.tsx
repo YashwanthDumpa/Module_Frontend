@@ -98,7 +98,7 @@ export default function Card(props: any) {
       </div>
       <div className="foot">
         {window.location.pathname === "/LearningDevelopment" ? (
-          <button className="btn btn-sm see-more" disabled={props.tdata.is_disabled} onClick={handleTraining}>
+          <button className="btn btn-sm see-more" disabled={props.tdata.isDisabled} onClick={handleTraining}>
             Register
           </button>
         ) : (

@@ -167,7 +167,7 @@ const handleAdminAccess = async(mailId:any)=>{
   }
 
   const filteredData = trainingData.filter((training: any) => {
-    return training.FirstName.toLowerCase().includes(searchTerm.toLowerCase());
+    return training.firstName.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   console.log(filteredData);
@@ -260,15 +260,15 @@ const handleAdminAccess = async(mailId:any)=>{
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row" align="center">
-                      {training.FirstName}
+                      {training.firstName}
                     </TableCell>
-                    <TableCell align="center">{training.LastName}</TableCell>
-                    <TableCell align="center">{training.Employee_Email}</TableCell>
+                    <TableCell align="center">{training.lastName}</TableCell>
+                    <TableCell align="center">{training.employeeEmail}</TableCell>
                     <TableCell align="center">
                       <Checkbox
-                        checked={training.is_admin}
+                        checked={training.isAdmin}
                         name = {training.mail}
-                        onChange={()=>handleAdminAccess(training.Employee_Email)}
+                        onChange={()=>handleAdminAccess(training.employeeEmail)}
                         inputProps={{ "aria-label": "controlled" }}
                       />
                     </TableCell>

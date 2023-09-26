@@ -240,7 +240,7 @@ export default function Dashboard() {
                     </CustomCheckbox>
                     <CustomCheckbox
                       align="center"
-                      onClick={() => handleSort("RegisteredDateTime")}
+                      onClick={() => handleSort("registeredDateTime")}
                     >
                       Registered Date <SwapVertIcon style={{ fontSize: "20px" }} />
                     </CustomCheckbox>
@@ -285,10 +285,10 @@ export default function Dashboard() {
                         {changeDateFormat(training.endDateTime)}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {changeDateFormat(training.RegisteredDateTime.split("T")[0])}
+                        {changeDateFormat(training.registeredDateTime.split("T")[0])}
                       </CustomTableCell>
                       <CustomTableCell align="center">
-                        {training.RegisteredDateTime.split("T")[1].split(".")[0]}
+                        {training.registeredDateTime.split("T")[1].split(".")[0]}
                       </CustomTableCell>
                     </ThemeProvider>
                   </TableRow>
